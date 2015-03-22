@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MyProfileViewController.h
 //  Microblog1.1
 //
 //  Created by 王志盼 on 15/3/20.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MyProfileViewController : UITableViewController
 
 @end
-
