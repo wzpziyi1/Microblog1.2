@@ -9,6 +9,7 @@
 #import "MyDiscoverViewController.h"
 #import "UIImage+Extension.h"
 #import "UINavigationItem+Extension.h"
+#import "MySearchBar.h"
 
 @interface MyDiscoverViewController ()
 
@@ -19,7 +20,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"系统设置" style:UIBarButtonItemStyleDone target:nil action:nil];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"系统设置" style:UIBarButtonItemStyleDone target:nil action:nil];
+    
+    /*  一般是自定义一个UITextField，将这些封装起来
+    UITextField *searchBar = [[UITextField alloc] init];
+    searchBar.frame = CGRectMake(0, 0, 355, 35);
+    [searchBar setBackground:[UIImage resizedImage:@"searchbar_textfield_background"]];
+    
+    
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.frame = CGRectMake(0, 0, 35, 35);
+    imageView.image = [UIImage imageWithName:@"searchbar_textfield_search_icon"];
+    imageView.contentMode = UIViewContentModeCenter;
+    searchBar.leftView = imageView;      //UITextField 中不仅有leftView，还有rightView，但是默认情况下，他们都是从不显示的，所以需要修改其中属性，使得他们总是显示
+    searchBar.leftViewMode = UITextFieldViewModeAlways;   //设置leftView总是显示
+    searchBar.clearButtonMode = UITextFieldViewModeAlways; //设置清楚按钮显示
+    
+    searchBar.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;//设置内容垂直居中，以免造成内容垂直方向偏上
+    self.navigationItem.titleView = searchBar;
+     */
+    MySearchBar *searchBar = [MySearchBar searchBarWithRect:CGRectMake(0, 0, 355, 35)];
+    self.navigationItem.titleView = searchBar;
 }
 
 - (void)didReceiveMemoryWarning {

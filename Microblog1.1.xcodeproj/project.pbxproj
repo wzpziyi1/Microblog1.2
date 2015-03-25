@@ -21,6 +21,8 @@
 		09A1FED01ABC452100556B64 /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A1FECF1ABC452100556B64 /* MyProfileViewController.m */; };
 		09A1FED31ABC58FC00556B64 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A1FED21ABC58FC00556B64 /* UIImage+Extension.m */; };
 		09CE68F91ABE723700F9886B /* MyTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CE68F81ABE723700F9886B /* MyTitleButton.m */; };
+		09CF22D41ABED386009DDBFA /* MySearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CF22D31ABED386009DDBFA /* MySearchBar.m */; };
+		09CF22D71ABED911009DDBFA /* MyPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CF22D61ABED911009DDBFA /* MyPopMenu.m */; };
 		09DCA4F21ABD5D620075C5A5 /* UINavigationItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DCA4F11ABD5D620075C5A5 /* UINavigationItem+Extension.m */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,10 @@
 		09A1FED21ABC58FC00556B64 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
 		09CE68F71ABE723700F9886B /* MyTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTitleButton.h; sourceTree = "<group>"; };
 		09CE68F81ABE723700F9886B /* MyTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTitleButton.m; sourceTree = "<group>"; };
+		09CF22D21ABED386009DDBFA /* MySearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySearchBar.h; sourceTree = "<group>"; };
+		09CF22D31ABED386009DDBFA /* MySearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySearchBar.m; sourceTree = "<group>"; };
+		09CF22D51ABED911009DDBFA /* MyPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPopMenu.h; sourceTree = "<group>"; };
+		09CF22D61ABED911009DDBFA /* MyPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPopMenu.m; sourceTree = "<group>"; };
 		09DCA4F01ABD5D620075C5A5 /* UINavigationItem+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+Extension.h"; sourceTree = "<group>"; };
 		09DCA4F11ABD5D620075C5A5 /* UINavigationItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+Extension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,6 +187,8 @@
 		09A1FEA91ABC426D00556B64 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				09CF22D21ABED386009DDBFA /* MySearchBar.h */,
+				09CF22D31ABED386009DDBFA /* MySearchBar.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -216,6 +224,8 @@
 			children = (
 				09CE68F71ABE723700F9886B /* MyTitleButton.h */,
 				09CE68F81ABE723700F9886B /* MyTitleButton.m */,
+				09CF22D51ABED911009DDBFA /* MyPopMenu.h */,
+				09CF22D61ABED911009DDBFA /* MyPopMenu.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -446,7 +456,9 @@
 				09A1FED01ABC452100556B64 /* MyProfileViewController.m in Sources */,
 				09CE68F91ABE723700F9886B /* MyTitleButton.m in Sources */,
 				09A1FECD1ABC450700556B64 /* MyDiscoverViewController.m in Sources */,
+				09CF22D41ABED386009DDBFA /* MySearchBar.m in Sources */,
 				09DCA4F21ABD5D620075C5A5 /* UINavigationItem+Extension.m in Sources */,
+				09CF22D71ABED911009DDBFA /* MyPopMenu.m in Sources */,
 				09A1FEC31ABC426D00556B64 /* MyTabBarController.m in Sources */,
 				09A1FE7F1ABC413500556B64 /* main.m in Sources */,
 				09A1FED31ABC58FC00556B64 /* UIImage+Extension.m in Sources */,

@@ -10,9 +10,11 @@
 #import "UIImage+Extension.h"
 #import "UINavigationItem+Extension.h"
 #import "MyTitleButton.h"
+#import "MyPopMenu.h"
 
-@interface MyHomeViewController ()
-@property (nonatomic, assign) BOOL downImage;
+#define ID @"homeCell"
+@interface MyHomeViewController ()<MyPopMenuDelegate>
+
 @end
 
 @implementation MyHomeViewController
@@ -44,36 +46,45 @@
     
     self.navigationItem.rightBarButtonItem = rightItem;
      */
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
+    
     self.navigationItem.leftBarButtonItem = [UINavigationItem itemWithImageName:@"navigationbar_friendsearch" highImageName:@"navigationbar_friendsearch_highlighted" target:self action:@selector(friendsearch:)];
     
     self.navigationItem.rightBarButtonItem = [UINavigationItem itemWithImageName:@"navigationbar_pop" highImageName:@"navigationbar_pop_highlighted" target:self action:@selector(pop)];
     
+    //设置导航栏标题
     MyTitleButton *titleBnt = [[MyTitleButton alloc] init];
     titleBnt.frame = CGRectMake(0, 0, 100, 35);
     [titleBnt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [titleBnt setTitle:@"首页" forState:UIControlStateNormal];
     [titleBnt setImage:[UIImage imageWithName:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
     [titleBnt setBackgroundImage:[UIImage resizedImage:@"navigationbar_filter_background_highlighted"] forState:UIControlStateHighlighted];
-    
     [titleBnt addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
-    
     self.navigationItem.titleView = titleBnt;
     
+    
+}
+/**
+ *  这是在实现MyPopMenuDelegate方法
+ *  在这个方法中恢复navigationItem 的 titleView 正常
+ */
+- (void)popMenuDidDismissed:(MyPopMenu *)popMenu
+{
+    MyTitleButton *titleBnt = (MyTitleButton *)self.navigationItem.titleView;
+    [titleBnt setImage:[UIImage imageWithName:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
 }
 
 - (void)titleClick:(UIButton *)bnt
 {
     
     
-    if (self.downImage) {
-        self.downImage = NO;
-        [bnt setImage:[UIImage imageWithName:@"navigationbar_arrow_up"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        self.downImage = YES;
-        [bnt setImage:[UIImage imageWithName:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
-    }
+    [bnt setImage:[UIImage imageWithName:@"navigationbar_arrow_up"] forState:UIControlStateNormal];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    [button setBackgroundColor:[UIColor redColor]];
+    MyPopMenu *popMenu = [MyPopMenu popMenuWithContentView:button];
+    popMenu.delegate = self;
+    [popMenu showInRect:CGRectMake(120, 64, 100, 100)];
 }
 
 - (void)friendsearch:(id)bnt
@@ -108,9 +119,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *ID = @"cell";
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
     cell.textLabel.text = @"xnibcsbcn";
     return cell;
 }

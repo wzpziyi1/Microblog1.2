@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MySearchBar : UITextField
-
++ (instancetype)searchBarWithRect:(CGRect)rect;
 @end
