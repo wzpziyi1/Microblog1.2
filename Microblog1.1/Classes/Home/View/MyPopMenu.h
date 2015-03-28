@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    MyPopMenuArrowPositionCenter = 0,
+    MyPopMenuArrowPositionLeft = 1,
+    MyPopMenuArrowPositionRight = 2
+}MyPopMenuArrowPosition;
+
 
 @class MyPopMenu;
 
@@ -21,8 +27,26 @@
 @interface MyPopMenu : UIView
 
 @property (nonatomic, weak)id <MyPopMenuDelegate>delegate;
-- (void)showInRect:(CGRect)rect;
 
+/**
+ *  设置箭头位置
+ */
+@property (nonatomic, assign) MyPopMenuArrowPosition arrowPosition;
+/**
+ *  这个属性用来设置弹出的view是否显示黑色阴影
+ */
+@property (nonatomic, assign) BOOL blackBackground;
+
+- (void)didmiss;
+/**
+ *  设置container的尺寸
+ *
+ */
+- (void)showInRect:(CGRect)rect;
+/**
+ *  设置背景颜色
+ *
+ */
 - (void)setBackground:(UIImage *)background;
 
 + (instancetype)popMenuWithContentView:(UIView *)contentView;

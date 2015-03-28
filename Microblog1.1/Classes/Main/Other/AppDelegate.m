@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MyTabBarController.h"
+#import "MyNewfeatureViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -20,9 +21,30 @@
 //    application.statusBarHidden = NO;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
+    MyNewfeatureViewController *newFeature = [[MyNewfeatureViewController alloc] init];
+    self.window.rootViewController = newFeature;
+    //[newFeature.view setBackgroundColor:[UIColor redColor]];
+//    
+//    // 从沙盒中取出上次存储的软件版本号(取出用户上次的使用记录)
+//    NSString *versionKey = @"CFBundleVersion";
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *lastVersion = [defaults objectForKey:versionKey];
+//    
+//    // 获得当前打开软件的版本号
+//    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[versionKey];
+//    
+//    if ([currentVersion isEqualToString:lastVersion]) { // 当前版本号 == 上次使用的版本,直接进入
+//        MyTabBarController *tabController = [[MyTabBarController alloc] init];
+//        self.window.rootViewController = tabController;
+//    } else { // 当前版本号 != 上次使用的版本：显示版本新特性
+//        self.window.rootViewController = [[MyNewfeatureViewController alloc] init];
+//        
+//        // 存储这次使用的软件版本
+//        [defaults setObject:currentVersion forKey:versionKey];
+//        [defaults synchronize];
+//    }
     
-    MyTabBarController *tabController = [[MyTabBarController alloc] init];
-    self.window.rootViewController = tabController;
+    
     return YES;
 }
 

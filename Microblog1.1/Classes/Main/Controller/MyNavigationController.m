@@ -41,24 +41,43 @@
 
 + (void)setNaviagtionTheme   //设置导航栏主题，在ios6中，导航栏显示很不好看，需要调整
 {
+//    UINavigationBar *appearance = [UINavigationBar appearance];
+//    
+//    if ([[UIDevice currentDevice].systemVersion floatValue] < 7.0) {   //设置导航栏样式  ，ios7中不需要
+//        [appearance setBackgroundImage:[UIImage imageWithName:@"navigationbar_background"]
+//                         forBarMetrics:UIBarMetricsDefault];
+//    }
+//    // 设置文字属性
+//    NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
+//    textAttrs[NSForegroundColorAttributeName] = [UIColor blackColor];
+//    // UITextAttributeFont  --> NSFontAttributeName(iOS7)
+
+//    textAttrs[NSFontAttributeName] = [UIFont boldSystemFontOfSize:28];
+//    
+//    // UIOffsetZero是结构体, 只要包装成NSValue对象, 才能放进字典\数组中,这样可以取消重叠的阴影
+//    textAttrs[NSShadowAttributeName] = [NSValue valueWithUIOffset:UIOffsetZero];
+//    
+//    [appearance setTitleTextAttributes:textAttrs];
+    
     UINavigationBar *appearance = [UINavigationBar appearance];
     
-    if ([[UIDevice currentDevice].systemVersion floatValue] < 7.0) {   //设置导航栏样式  ，ios7中不需要
-        [appearance setBackgroundImage:[UIImage imageWithName:@"navigationbar_background"]
-                         forBarMetrics:UIBarMetricsDefault];
+    // 设置导航栏背景，ios7中不需要
+    if ([[UIDevice currentDevice].systemVersion floatValue] < 7.0) {
+        [appearance setBackgroundImage:[UIImage imageWithName:@"navigationbar_background"] forBarMetrics:UIBarMetricsDefault];
     }
+    
     // 设置文字属性
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-    textAttrs[NSForegroundColorAttributeName] = [UIColor blackColor];
+    textAttrs[UITextAttributeTextColor] = [UIColor blackColor];
     // UITextAttributeFont  --> NSFontAttributeName(iOS7)
-#warning 过期 : 并不代表不能用, 仅仅是有最新的方案可以取代它
-    textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:20.0];
-    
-    // UIOffsetZero是结构体, 只要包装成NSValue对象, 才能放进字典\数组中,这样可以取消重叠的阴影
-    textAttrs[NSShadowAttributeName] = [NSValue valueWithUIOffset:UIOffsetZero];
+
+    textAttrs[UITextAttributeFont] = [UIFont boldSystemFontOfSize:20];//粗体，
+    // UIOffsetZero是结构体, 只要包装成NSValue对象, 才能放进字典\数组中
+    textAttrs[UITextAttributeTextShadowOffset] = [NSValue valueWithUIOffset:UIOffsetZero];
+    [appearance setTitleTextAttributes:textAttrs];
 }
 
-+ (void)setBarButtonStyle     //需要注意，类方法里面只能调用类方法，而不能调用对象方法
++ (void)setBarButtonStyle     //需要注意
 {
     
     //通过设置这个属性，可是设置整个导航栏的UIBarButtonItem的属性
@@ -68,7 +87,7 @@
     //文字颜色
     textAttrs[NSForegroundColorAttributeName] = [UIColor orangeColor];
     //文字字体
-    textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:15.0];
+    textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:18.0];
     [appearance setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
     
     // 设置高亮状态的文字属性

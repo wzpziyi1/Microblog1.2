@@ -84,7 +84,7 @@
     [button setBackgroundColor:[UIColor redColor]];
     MyPopMenu *popMenu = [MyPopMenu popMenuWithContentView:button];
     popMenu.delegate = self;
-    [popMenu showInRect:CGRectMake(120, 64, 100, 100)];
+    [popMenu showInRect:CGRectMake(120, 64, 200, 300)];
 }
 
 - (void)friendsearch:(id)bnt

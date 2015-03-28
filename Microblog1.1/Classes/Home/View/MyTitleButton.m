@@ -17,9 +17,12 @@
         self.imageView.contentMode = UIViewContentModeCenter;  //图片按照原样居中显示
         self.titleLabel.textAlignment = NSTextAlignmentRight;
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.titleLabel.font = [UIFont systemFontOfSize:20.0];
+        //self.titleLabel.font = [UIFont systemFontOfSize:20.0];
         //图片高亮时不需要灰色显示
         self.adjustsImageWhenHighlighted = NO;
+//        NSLog(@"%@",self.titleLabel)
+        self.titleLabel.font = [UIFont boldSystemFontOfSize:20];
+        
         
     }
     return self;

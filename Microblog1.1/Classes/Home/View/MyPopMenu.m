@@ -21,6 +21,36 @@
 
 @implementation MyPopMenu
 
+- (void)setBlackBackground:(BOOL)blackBackground
+{
+    _blackBackground = blackBackground;
+    if (_blackBackground == YES) {
+        [self.cover setBackgroundColor:[UIColor blackColor]];
+        self.cover.alpha = 0.35;
+    }
+    else
+    {
+        [self.cover setBackgroundColor:[UIColor clearColor]];
+        self.cover.alpha = 1.0;
+    }
+}
+
+- (void)setArrowPosition:(MyPopMenuArrowPosition)arrowPosition
+{
+    _arrowPosition = arrowPosition;
+    switch (_arrowPosition) {
+        case MyPopMenuArrowPositionCenter:
+            self.container.image = [UIImage resizedImage:@"popover_background"];
+            break;
+        case MyPopMenuArrowPositionLeft:
+            self.container.image = [UIImage resizedImage:@"popover_background_left"];
+            break;
+        case MyPopMenuArrowPositionRight:
+            self.container.image = [UIImage resizedImage:@"popover_background_right"];
+            break;
+    }
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -34,11 +64,13 @@
         //用来加载带箭头的图片
         UIImageView *container = [[UIImageView alloc] init];
         container.image = [UIImage resizedImage:@"popover_background"];
-        
         //在这里，这张图片必须响应用户的交互
         container.userInteractionEnabled = YES; //该属性值为布尔类型，如属性本身的名称所释，该属性决定UIView是否接受并响应用户的交互。当值设置为NO后，UIView会忽略那些原本应该发生在其自身的诸如touch和keyboard等用户事件，并将这些事件从消息队列中移除出去。当值设置为YES后，这些用户事件会正常的派发至UIView本身(前提事件确实发生在该view上)，UIView会按照之前注册的事件处理方法来响应这些事件。
         [self addSubview:container];
         self.container = container;
+        //self.blackBackground = YES;
+        //self.arrowPosition = MyPopMenuArrowPositionRight;
+        
     }
     return self;
 }
