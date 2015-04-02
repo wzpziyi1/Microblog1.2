@@ -9,6 +9,11 @@
 #import "AppDelegate.h"
 #import "MyTabBarController.h"
 #import "MyNewfeatureViewController.h"
+#import "MyAccountTool.h"
+#import "MyControllerTool.h"
+#import "MyOAuthViewController.h"
+#import "SDImageCache.h"
+#import "SDWebImageManager.h"
 @interface AppDelegate ()
 
 @end
@@ -21,31 +26,32 @@
 //    application.statusBarHidden = NO;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
-    MyNewfeatureViewController *newFeature = [[MyNewfeatureViewController alloc] init];
-    self.window.rootViewController = newFeature;
-    //[newFeature.view setBackgroundColor:[UIColor redColor]];
-//    
-//    // 从沙盒中取出上次存储的软件版本号(取出用户上次的使用记录)
-//    NSString *versionKey = @"CFBundleVersion";
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    NSString *lastVersion = [defaults objectForKey:versionKey];
-//    
-//    // 获得当前打开软件的版本号
-//    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[versionKey];
-//    
-//    if ([currentVersion isEqualToString:lastVersion]) { // 当前版本号 == 上次使用的版本,直接进入
-//        MyTabBarController *tabController = [[MyTabBarController alloc] init];
-//        self.window.rootViewController = tabController;
-//    } else { // 当前版本号 != 上次使用的版本：显示版本新特性
-//        self.window.rootViewController = [[MyNewfeatureViewController alloc] init];
-//        
-//        // 存储这次使用的软件版本
-//        [defaults setObject:currentVersion forKey:versionKey];
-//        [defaults synchronize];
-//    }
+    //获得沙盒中存储的账号
+    MyAccount *account = [MyAccountTool account];
     
-    
+//    [MyControllerTool chooseRootViewController];
+    if (account) {  //如果沙盒中存在账号，那么看是否需要显示新特性
+        [MyControllerTool chooseRootViewController];
+    }
+    else  //如果不存在，那么直接进行OAuth授权
+    {
+        MyOAuthViewController *oauth = [[MyOAuthViewController alloc] init];
+        self.window.rootViewController = oauth;
+    }
     return YES;
+}
+
+/**
+ *  发生内存警告时
+ *
+ */
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+    //清除所有的内存缓存
+    [[SDImageCache sharedImageCache] clearMemory];
+    
+    //停止正在进行的图片下载操作
+    [[SDWebImageManager sharedManager] cancelAll];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -71,6 +77,9 @@
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
 }
+
+
+
 
 #pragma mark - Core Data stack
 

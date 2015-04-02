@@ -12,6 +12,13 @@
 #import "MyTitleButton.h"
 #import "MyPopMenu.h"
 
+#import "MBProgressHUD+MJ.h"
+#import "AFNetworking.h"
+#import "MJExtension.h"
+#import "MyAccount.h"
+#import "MyControllerTool.h"
+#import "MyAccountTool.h"
+
 #define ID @"homeCell"
 @interface MyHomeViewController ()<MyPopMenuDelegate>
 
@@ -21,30 +28,55 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //设置导航栏
+    [self setNavigationBar];
     
+    [self loadNewStatus];
+    
+    
+}
+
+- (void)loadNewStatus
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"access_token"] = [[MyAccountTool account] access_token];
+    NSLog(@"-----------%@",[[MyAccountTool account] access_token]);
+    
+    [mgr GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"请求成功------%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"请求失败------%@",error);
+    }];
+}
+
+- (void)setNavigationBar
+{
     /*
      naviagtion的naviagtionbar按钮设置，但必须将这些方法封装成一个类，调用即可
      
-    UIButton *bnt = [[UIButton alloc] init];
-
-    [bnt setBackgroundImage:[UIImage imageWithName:@"navigationbar_friendsearch"] forState:UIControlStateNormal];
-    [bnt setBackgroundImage:[UIImage imageWithName:@"navigationbar_friendsearch_highlighted"] forState:UIControlStateHighlighted];
-    [bnt addTarget:self action:@selector(friendsearch:) forControlEvents:UIControlEventTouchUpInside];
-    
-    bnt.frame = CGRectMake(0, 0, bnt.currentBackgroundImage.size.width, bnt.currentBackgroundImage.size.height);
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:bnt];
-    
-    self.navigationItem.leftBarButtonItem = item;
-    
-    UIButton *rightBnt = [[UIButton alloc] init];
-    [rightBnt setBackgroundImage:[UIImage imageWithName:@"navigationbar_pop"] forState:UIControlStateNormal];
-    [rightBnt setBackgroundImage:[UIImage imageWithName:@"navigationbar_pop_highlighted"] forState:UIControlStateHighlighted];
-    [rightBnt addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
-    
-    rightBnt.frame = CGRectMake(0, 0, rightBnt.currentBackgroundImage.size.width, rightBnt.currentBackgroundImage.size.height);
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBnt];
-    
-    self.navigationItem.rightBarButtonItem = rightItem;
+     UIButton *bnt = [[UIButton alloc] init];
+     
+     [bnt setBackgroundImage:[UIImage imageWithName:@"navigationbar_friendsearch"] forState:UIControlStateNormal];
+     [bnt setBackgroundImage:[UIImage imageWithName:@"navigationbar_friendsearch_highlighted"] forState:UIControlStateHighlighted];
+     [bnt addTarget:self action:@selector(friendsearch:) forControlEvents:UIControlEventTouchUpInside];
+     
+     bnt.frame = CGRectMake(0, 0, bnt.currentBackgroundImage.size.width, bnt.currentBackgroundImage.size.height);
+     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:bnt];
+     
+     self.navigationItem.leftBarButtonItem = item;
+     
+     UIButton *rightBnt = [[UIButton alloc] init];
+     [rightBnt setBackgroundImage:[UIImage imageWithName:@"navigationbar_pop"] forState:UIControlStateNormal];
+     [rightBnt setBackgroundImage:[UIImage imageWithName:@"navigationbar_pop_highlighted"] forState:UIControlStateHighlighted];
+     [rightBnt addTarget:self action:@selector(pop) forControlEvents:UIControlEventTouchUpInside];
+     
+     rightBnt.frame = CGRectMake(0, 0, rightBnt.currentBackgroundImage.size.width, rightBnt.currentBackgroundImage.size.height);
+     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBnt];
+     
+     self.navigationItem.rightBarButtonItem = rightItem;
      */
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
     
@@ -61,8 +93,6 @@
     [titleBnt setBackgroundImage:[UIImage resizedImage:@"navigationbar_filter_background_highlighted"] forState:UIControlStateHighlighted];
     [titleBnt addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = titleBnt;
-    
-    
 }
 /**
  *  这是在实现MyPopMenuDelegate方法
