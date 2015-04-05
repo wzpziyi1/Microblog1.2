@@ -19,15 +19,23 @@
 #import "MyControllerTool.h"
 #import "MyAccountTool.h"
 
+#import "MyStatus.h"
+#import "MyUser.h"
+#import "AFNetworking.h"
+#import "UIImageView+WebCache.h"
+
 #define ID @"homeCell"
 @interface MyHomeViewController ()<MyPopMenuDelegate>
-
+@property (nonatomic, strong) NSMutableArray *statuses;
 @end
 
 @implementation MyHomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
+    
     //设置导航栏
     [self setNavigationBar];
     
@@ -42,11 +50,20 @@
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"access_token"] = [[MyAccountTool account] access_token];
-    NSLog(@"-----------%@",[[MyAccountTool account] access_token]);
+    //NSLog(@"-----------%@",[[MyAccountTool account] access_token]);
     
     [mgr GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"请求成功------%@",responseObject);
+//        NSLog(@"请求成功------%@",responseObject[@"statuses"]);
+//        NSLog(@"----%@",[responseObject class]);
+        NSArray *statusArray = responseObject[@"statuses"];
+        self.statuses = [MyStatus objectArrayWithKeyValuesArray:statusArray];
+        
+//        for (id object in self.statuses) {
+//            NSLog(@"----%@-----%@",[object class],object);
+//        }
+        [self.tableView reloadData];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"请求失败------%@",error);
     }];
@@ -78,7 +95,7 @@
      
      self.navigationItem.rightBarButtonItem = rightItem;
      */
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
     
     self.navigationItem.leftBarButtonItem = [UINavigationItem itemWithImageName:@"navigationbar_friendsearch" highImageName:@"navigationbar_friendsearch_highlighted" target:self action:@selector(friendsearch:)];
     
@@ -144,14 +161,29 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 15;
+    return self.statuses.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
-    cell.textLabel.text = @"xnibcsbcn";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
+    }
+    MyStatus *status = self.statuses[indexPath.row];
+    MyUser *user = status.user;
+    cell.textLabel.text = status.text;
+    cell.detailTextLabel.text = user.name;
+    
+    NSString *imageUrl = user.profile_image_url;
+    
+//    [UIImage imageNamed:]
+        //设置占位图片，下载图片的时候
+    [cell.imageView setImageWithURL:imageUrl placeholderImage:[UIImage imageWithName:@"avatar_default_small"]];
+    
     return cell;
 }
 
