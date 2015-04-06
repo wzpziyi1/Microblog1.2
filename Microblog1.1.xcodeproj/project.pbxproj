@@ -65,6 +65,9 @@
 		09B7516E1AC28B8400F03084 /* MyTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B7516D1AC28B8400F03084 /* MyTabBar.m */; };
 		09B751751AC2A1ED00F03084 /* MyComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B751741AC2A1ED00F03084 /* MyComposeViewController.m */; };
 		09B751801AC2BB5A00F03084 /* MyNewfeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B7517F1AC2BB5A00F03084 /* MyNewfeatureViewController.m */; };
+		09CB93881AD186DB00D449F2 /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CB93871AD186DB00D449F2 /* MyTextView.m */; };
+		09CB938B1AD19AA900D449F2 /* MyFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CB938A1AD19AA900D449F2 /* MyFootView.m */; };
+		09CB938D1AD19AC600D449F2 /* MyFootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09CB938C1AD19AC600D449F2 /* MyFootView.xib */; };
 		09CE68F91ABE723700F9886B /* MyTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CE68F81ABE723700F9886B /* MyTitleButton.m */; };
 		09CF22D41ABED386009DDBFA /* MySearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CF22D31ABED386009DDBFA /* MySearchBar.m */; };
 		09CF22D71ABED911009DDBFA /* MyPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CF22D61ABED911009DDBFA /* MyPopMenu.m */; };
@@ -200,6 +203,11 @@
 		09B751741AC2A1ED00F03084 /* MyComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComposeViewController.m; sourceTree = "<group>"; };
 		09B7517E1AC2BB5A00F03084 /* MyNewfeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNewfeatureViewController.h; sourceTree = "<group>"; };
 		09B7517F1AC2BB5A00F03084 /* MyNewfeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNewfeatureViewController.m; sourceTree = "<group>"; };
+		09CB93861AD186DB00D449F2 /* MyTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextView.h; sourceTree = "<group>"; };
+		09CB93871AD186DB00D449F2 /* MyTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTextView.m; sourceTree = "<group>"; };
+		09CB93891AD19AA900D449F2 /* MyFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFootView.h; sourceTree = "<group>"; };
+		09CB938A1AD19AA900D449F2 /* MyFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFootView.m; sourceTree = "<group>"; };
+		09CB938C1AD19AC600D449F2 /* MyFootView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyFootView.xib; sourceTree = "<group>"; };
 		09CE68F71ABE723700F9886B /* MyTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTitleButton.h; sourceTree = "<group>"; };
 		09CE68F81ABE723700F9886B /* MyTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTitleButton.m; sourceTree = "<group>"; };
 		09CF22D21ABED386009DDBFA /* MySearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySearchBar.h; sourceTree = "<group>"; };
@@ -373,6 +381,9 @@
 				09CE68F81ABE723700F9886B /* MyTitleButton.m */,
 				09CF22D51ABED911009DDBFA /* MyPopMenu.h */,
 				09CF22D61ABED911009DDBFA /* MyPopMenu.m */,
+				09CB93891AD19AA900D449F2 /* MyFootView.h */,
+				09CB938A1AD19AA900D449F2 /* MyFootView.m */,
+				09CB938C1AD19AC600D449F2 /* MyFootView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -675,6 +686,8 @@
 		09B751721AC2A1AC00F03084 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				09CB93861AD186DB00D449F2 /* MyTextView.h */,
+				09CB93871AD186DB00D449F2 /* MyTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -792,6 +805,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09CB938D1AD19AC600D449F2 /* MyFootView.xib in Resources */,
 				09A1FE901ABC413500556B64 /* LaunchScreen.xib in Resources */,
 				09A1FE8D1ABC413500556B64 /* Images.xcassets in Resources */,
 				09A990251AC80951001DB137 /* MBProgressHUD.bundle in Resources */,
@@ -828,8 +842,10 @@
 				09A990131AC80924001DB137 /* SDWebImageDownloader.m in Sources */,
 				09B751801AC2BB5A00F03084 /* MyNewfeatureViewController.m in Sources */,
 				09A9901A1AC80924001DB137 /* UIImage+WebP.m in Sources */,
+				09CB938B1AD19AA900D449F2 /* MyFootView.m in Sources */,
 				09A990001AC80924001DB137 /* AFHTTPSessionManager.m in Sources */,
 				09DCA4F21ABD5D620075C5A5 /* UINavigationItem+Extension.m in Sources */,
+				09CB93881AD186DB00D449F2 /* MyTextView.m in Sources */,
 				09CF22D71ABED911009DDBFA /* MyPopMenu.m in Sources */,
 				09A990011AC80924001DB137 /* AFNetworkReachabilityManager.m in Sources */,
 				09A9901B1AC80924001DB137 /* UIImageView+HighlightedWebCache.m in Sources */,

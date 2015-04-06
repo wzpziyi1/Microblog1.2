@@ -24,26 +24,218 @@
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 
+#import "MyAccountTool.h"
+#import "MyAccount.h"
+
+#import "MyFootView.h"
+
 #define ID @"homeCell"
-@interface MyHomeViewController ()<MyPopMenuDelegate>
+@interface MyHomeViewController ()<MyPopMenuDelegate, UIScrollViewDelegate>
+
 @property (nonatomic, strong) NSMutableArray *statuses;
+
+@property (nonatomic, weak) MyFootView *footView;
 @end
 
 @implementation MyHomeViewController
 
+- (NSMutableArray *)statuses
+{
+    if (_statuses == nil) {
+        _statuses = [NSMutableArray array];
+    }
+    return _statuses;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 //    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
     
     //设置导航栏
     [self setNavigationBar];
     
-    [self loadNewStatus];
+//    
+//    //加载微博数据
+//    [self loadNewStatus];
     
+    //刷新数据
+    [self setupRefresh];
+    
+    //添加footView,控制上拉刷新,设置代理，监听scrollView的滚动，当footView滚动到一定位置时，开始刷新
+    MyFootView *footView = [MyFootView footView];
+    self.tableView.tableFooterView = footView;
+    self.footView = footView;
     
 }
+/**
+ *  监听scrollView的滚动，当footView滚动到一定位置时，开始上拉刷新
+ *
+ */
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.statuses.count <= 0 || self.footView.isRefreshing) {
+        return;
+    }
+    //差距
+    CGFloat distance = self.tableView.contentSize.height - self.tableView.contentOffset.y;
+    // 刚好能完整看到footer的高度
+    CGFloat seeFootH = self.view.frame.size.height - self.tabBarController.tabBar.frame.size.height;
+    //如果能看见整个footer
+    if (distance < seeFootH) {
+        [self.footView beginLoad];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //向下加载更多数据
+            [self loadMoreStatus];
+        });
+    }
+}
 
+/**
+ *  向下加载更多数据
+ */
+- (void)loadMoreStatus
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"access_token"] = [[MyAccountTool account] access_token];
+    MyStatus *lastStatus = [self.statuses lastObject];
+    
+    if (lastStatus) {
+        // max_id	false	int64	若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
+        params[@"max_id"] = @([lastStatus.idstr longLongValue] - 1);
+    }
+    
+    [manager GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSArray *StatusArray = responseObject[@"statuses"];
+        NSArray *oldStatuses = [MyStatus objectArrayWithKeyValuesArray:StatusArray];
+        
+        // 将新数据插入到旧数据的最后面
+        [self.statuses addObjectsFromArray:oldStatuses];
+        
+        [self.tableView reloadData];
+        
+        [self.footView endLoad];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.footView endLoad];
+    }];
+}
+
+- (void)setupRefresh
+{
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init]; //上拉刷新控件
+    [self.tableView addSubview:refresh];
+    
+    [refresh addTarget:self action:@selector(refreshControlStateChange:) forControlEvents:UIControlEventValueChanged]; //在UIRefreshControl里面是没有方法可以监听值改变的，但是UIRefreshControl继承自UIControll，从而可以监听值得改变，做到上拉刷新操作
+    
+    [refresh beginRefreshing];
+    
+    [self refreshControlStateChange:refresh];
+    
+}
+/**
+ *  下拉刷新时，调用
+ *
+ */
+- (void)refreshControlStateChange:(UIRefreshControl *)refresh
+{
+    AFHTTPRequestOperationManager *manage = [AFHTTPRequestOperationManager manager];
+    
+    //封装请求参数
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    
+    params[@"access_token"] = [[MyAccountTool account] access_token];
+    MyStatus *firstStatus = [self.statuses firstObject];
+    
+    if (firstStatus) {
+        // since_id 	false 	int64 	若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
+        params[@"since_id"] = firstStatus.idstr;
+    }
+    [manage GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSArray *statusArray = responseObject[@"statuses"];
+        
+        NSArray *newStatuses = [MyStatus objectArrayWithKeyValuesArray:statusArray];  //数组转模型
+        NSLog(@"%@",newStatuses);
+        
+        /****************************将一个数组中得所有对象插入另一个数组的索引位置******************************************/
+        
+        //        [self.statuses insertObject:statusArray atIndex:0];   //这个函数，是将一个数组当成一个对象插入到另一个数组的索引位置
+        
+        NSRange range = NSMakeRange(0, newStatuses.count);
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+        [self.statuses insertObjects:newStatuses atIndexes:indexSet];
+//        NSLog(@"----------%@",self.statuses.count);
+        //刷新tableView
+        [self.tableView reloadData];
+        [refresh endRefreshing];
+        //显示新的微博数量
+        [self showNewStatusCount:(int)newStatuses.count];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"刷新失败");
+        [refresh endRefreshing];
+    }];
+}
+
+/**
+ *  显示微博数目
+ *
+ */
+- (void)showNewStatusCount:(int)count
+{
+    UILabel *showStatus = [[UILabel alloc] init];
+    
+    if (count) {
+        showStatus.text = [NSString stringWithFormat:@"共有%d条新的微博数据",count];
+    }
+    else
+    {
+        showStatus.text = @"没有新的微博数据";
+    }
+//    [UIImage imageNamed:@"timeline_new_status_background"]
+    showStatus.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageWithName:@"timeline_new_status_background"]];
+    showStatus.textAlignment = NSTextAlignmentCenter;
+    showStatus.frame = CGRectMake(0, 29, self.view.frame.size.width, 35);
+    
+    [self.navigationController.view insertSubview:showStatus belowSubview:self.navigationController.navigationBar];  //最好是添加到这里
+    
+    /*******************将一个控件插入另一控件*************************/
+    
+//    self.view insertSubview:<#(UIView *)#> belowSubview:<#(UIView *)#>  将一个控件插入另一控件下面
+//    self.view insertSubview:<#(UIView *)#> atIndex:<#(NSInteger)#>  按索引插入
+//    self.view insertSubview:<#(UIView *)#> aboveSubview:<#(UIView *)#>  插入上面
+    
+    
+//    [self.view addSubview:showStatus];
+    
+    [UIView animateWithDuration:0.75 animations:^{
+        showStatus.transform = CGAffineTransformMakeTranslation(0, 35);
+    } completion:^(BOOL finished) {
+//        [NSThread sleepForTimeInterval:1];  //阻塞主线程1s，再执行下面操作
+        
+        
+        /**
+         UIViewAnimationOptionCurveEaseInOut            = 0 << 16, // 开始：由慢到快，结束：由快到慢
+         UIViewAnimationOptionCurveEaseIn               = 1 << 16, // 由慢到块
+         UIViewAnimationOptionCurveEaseOut              = 2 << 16, // 由快到慢
+         UIViewAnimationOptionCurveLinear               = 3 << 16, // 线性，匀速
+         */
+
+        [UIView animateWithDuration:0.75 delay:1 options:UIViewAnimationOptionCurveLinear animations:^{  //延时1s
+            
+            showStatus.transform = CGAffineTransformIdentity;   //回到原来的状态
+        } completion:^(BOOL finished) {
+            [showStatus removeFromSuperview];
+        }];
+        
+    }];
+}
+
+/**
+ *  开始加载微博数据
+ */
 - (void)loadNewStatus
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
@@ -120,7 +312,10 @@
     MyTitleButton *titleBnt = (MyTitleButton *)self.navigationItem.titleView;
     [titleBnt setImage:[UIImage imageWithName:@"navigationbar_arrow_down"] forState:UIControlStateNormal];
 }
-
+/**
+ *  弹出弹框
+ *
+ */
 - (void)titleClick:(UIButton *)bnt
 {
     
