@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MyTextView : UITextView
-
+@property (nonatomic, copy) NSString *placeText;
+@property (nonatomic, strong) UIColor *placeTextColor;
 @end

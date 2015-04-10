@@ -8,7 +8,7 @@
 
 #import "MyOAuthViewController.h"
 #import "MBProgressHUD+MJ.h"
-#import "AFNetworking.h"
+#import "MyHTTPTool.h"
 #import "MJExtension.h"
 #import "MyAccount.h"
 #import "MyControllerTool.h"
@@ -90,10 +90,31 @@
 
 - (void)accessTokenWithCode:(NSString *)code
 {
-    //请求管理者
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    //mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", nil];  //需要设置这个变量接受text/plain的文件格式，但又不能直接覆盖它，所以去它所在的文件加上就好   加上的话，在acceptableContentTupes 、AFURLResponseSerialization里面
-    //请求参数
+//    //请求管理者
+//    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+//    //mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", nil];  //需要设置这个变量接受text/plain的文件格式，但又不能直接覆盖它，所以去它所在的文件加上就好   加上的话，在acceptableContentTupes 、AFURLResponseSerialization里面
+//    //请求参数
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    
+//    params[@"client_id"] = MyAppKey;
+//    params[@"client_secret"] = MyAppSecret;
+//    params[@"redirect_uri"] = MyRedirectURI;
+//    params[@"grant_type"] = @"authorization_code";
+//    params[@"code"] = code;
+//    
+//    [mgr POST:@"https://api.weibo.com/oauth2/access_token" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        [MBProgressHUD hideHUD];
+////        NSLog(@"请求成功------%@",responseObject);
+//        MyAccount *account = [MyAccount accountWithDict:responseObject];
+//        [MyAccountTool save:account];
+//        account = [MyAccountTool account];
+//        [MyControllerTool chooseRootViewController];
+//        
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [MBProgressHUD hideHUD];
+//        NSLog(@"请求失败------%@",error);
+//    }];
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
     params[@"client_id"] = MyAppKey;
@@ -102,18 +123,18 @@
     params[@"grant_type"] = @"authorization_code";
     params[@"code"] = code;
     
-    [mgr POST:@"https://api.weibo.com/oauth2/access_token" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [MBProgressHUD hideHUD];
-//        NSLog(@"请求成功------%@",responseObject);
-        MyAccount *account = [MyAccount accountWithDict:responseObject];
-        [MyAccountTool save:account];
-        account = [MyAccountTool account];
-        [MyControllerTool chooseRootViewController];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [MBProgressHUD hideHUD];
-        NSLog(@"请求失败------%@",error);
+    [MyHTTPTool post:@"https://api.weibo.com/oauth2/access_token" params:params success:^(id json) {
+            [MBProgressHUD hideHUD];
+        //    NSLog(@"请求成功------%@",responseObject);
+            MyAccount *account = [MyAccount accountWithDict:json];
+            [MyAccountTool save:account];
+            account = [MyAccountTool account];
+            [MyControllerTool chooseRootViewController];
+    } failure:^(NSError *error) {
+            [MBProgressHUD hideHUD];
+            NSLog(@"请求失败------%@",error);
     }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -129,7 +129,4 @@
     
     self.contentView.frame = CGRectMake(leftDistance, topDistance, self.container.frame.size.width - leftDistance - rightDistance, self.container.frame.size.height - topDistance - bottomDistance);
 }
-
-
-
 @end

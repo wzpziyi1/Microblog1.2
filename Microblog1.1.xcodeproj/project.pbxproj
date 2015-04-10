@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09830C971AD7B17D00D9E421 /* MyHTTPTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 09830C961AD7B17D00D9E421 /* MyHTTPTool.m */; };
 		09A1FE7F1ABC413500556B64 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A1FE7E1ABC413500556B64 /* main.m */; };
 		09A1FE851ABC413500556B64 /* Microblog1_1.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09A1FE831ABC413500556B64 /* Microblog1_1.xcdatamodeld */; };
 		09A1FE8D1ABC413500556B64 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09A1FE8C1ABC413500556B64 /* Images.xcassets */; };
@@ -72,6 +73,7 @@
 		09CF22D41ABED386009DDBFA /* MySearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CF22D31ABED386009DDBFA /* MySearchBar.m */; };
 		09CF22D71ABED911009DDBFA /* MyPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CF22D61ABED911009DDBFA /* MyPopMenu.m */; };
 		09DCA4F21ABD5D620075C5A5 /* UINavigationItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DCA4F11ABD5D620075C5A5 /* UINavigationItem+Extension.m */; };
+		09E6B7F31AD408A3001DEF56 /* MyComposeToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E6B7F21AD408A3001DEF56 /* MyComposeToolBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		09830C951AD7B17D00D9E421 /* MyHTTPTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHTTPTool.h; sourceTree = "<group>"; };
+		09830C961AD7B17D00D9E421 /* MyHTTPTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHTTPTool.m; sourceTree = "<group>"; };
 		09A1FE791ABC413500556B64 /* Microblog1.1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Microblog1.1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09A1FE7D1ABC413500556B64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09A1FE7E1ABC413500556B64 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -216,6 +220,8 @@
 		09CF22D61ABED911009DDBFA /* MyPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPopMenu.m; sourceTree = "<group>"; };
 		09DCA4F01ABD5D620075C5A5 /* UINavigationItem+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+Extension.h"; sourceTree = "<group>"; };
 		09DCA4F11ABD5D620075C5A5 /* UINavigationItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+Extension.m"; sourceTree = "<group>"; };
+		09E6B7F11AD408A3001DEF56 /* MyComposeToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComposeToolBar.h; sourceTree = "<group>"; };
+		09E6B7F21AD408A3001DEF56 /* MyComposeToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComposeToolBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -653,6 +659,8 @@
 				09A990311AC82CBC001DB137 /* MyAccountTool.m */,
 				09A9903C1AC835CF001DB137 /* MyControllerTool.h */,
 				09A9903D1AC835CF001DB137 /* MyControllerTool.m */,
+				09830C951AD7B17D00D9E421 /* MyHTTPTool.h */,
+				09830C961AD7B17D00D9E421 /* MyHTTPTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -688,6 +696,8 @@
 			children = (
 				09CB93861AD186DB00D449F2 /* MyTextView.h */,
 				09CB93871AD186DB00D449F2 /* MyTextView.m */,
+				09E6B7F11AD408A3001DEF56 /* MyComposeToolBar.h */,
+				09E6B7F21AD408A3001DEF56 /* MyComposeToolBar.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -849,6 +859,7 @@
 				09CF22D71ABED911009DDBFA /* MyPopMenu.m in Sources */,
 				09A990011AC80924001DB137 /* AFNetworkReachabilityManager.m in Sources */,
 				09A9901B1AC80924001DB137 /* UIImageView+HighlightedWebCache.m in Sources */,
+				09830C971AD7B17D00D9E421 /* MyHTTPTool.m in Sources */,
 				09A990121AC80924001DB137 /* SDWebImageDecoder.m in Sources */,
 				09A990161AC80924001DB137 /* SDWebImagePrefetcher.m in Sources */,
 				09A990061AC80924001DB137 /* AFURLSessionManager.m in Sources */,
@@ -862,6 +873,7 @@
 				09A9903B1AC834EA001DB137 /* MyPhoto.m in Sources */,
 				09A990181AC80924001DB137 /* UIImage+GIF.m in Sources */,
 				09A9901C1AC80924001DB137 /* UIImageView+WebCache.m in Sources */,
+				09E6B7F31AD408A3001DEF56 /* MyComposeToolBar.m in Sources */,
 				09A990051AC80924001DB137 /* AFURLResponseSerialization.m in Sources */,
 				09A990101AC80924001DB137 /* SDImageCache.m in Sources */,
 				09A990071AC80924001DB137 /* MJConst.m in Sources */,

@@ -11,9 +11,7 @@
 #import "UINavigationItem+Extension.h"
 #import "MyTitleButton.h"
 #import "MyPopMenu.h"
-
 #import "MBProgressHUD+MJ.h"
-#import "AFNetworking.h"
 #import "MJExtension.h"
 #import "MyAccount.h"
 #import "MyControllerTool.h"
@@ -21,7 +19,7 @@
 
 #import "MyStatus.h"
 #import "MyUser.h"
-#import "AFNetworking.h"
+#import "MyHTTPTool.h"
 #import "UIImageView+WebCache.h"
 
 #import "MyAccountTool.h"
@@ -81,7 +79,7 @@
     // 刚好能完整看到footer的高度
     CGFloat seeFootH = self.view.frame.size.height - self.tabBarController.tabBar.frame.size.height;
     //如果能看见整个footer
-    if (distance < seeFootH) {
+    if (distance + 20 < seeFootH) {
         [self.footView beginLoad];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             //向下加载更多数据
@@ -95,8 +93,6 @@
  */
 - (void)loadMoreStatus
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"access_token"] = [[MyAccountTool account] access_token];
     MyStatus *lastStatus = [self.statuses lastObject];
@@ -105,19 +101,17 @@
         // max_id	false	int64	若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
         params[@"max_id"] = @([lastStatus.idstr longLongValue] - 1);
     }
-    
-    [manager GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSArray *StatusArray = responseObject[@"statuses"];
+    [MyHTTPTool get:@"https://api.weibo.com/2/statuses/home_timeline.json" params:params success:^(id json) {
+        NSArray *StatusArray = json[@"statuses"];
         NSArray *oldStatuses = [MyStatus objectArrayWithKeyValuesArray:StatusArray];
-        
+
         // 将新数据插入到旧数据的最后面
         [self.statuses addObjectsFromArray:oldStatuses];
-        
+
         [self.tableView reloadData];
-        
+                
         [self.footView endLoad];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSError *error) {
         [self.footView endLoad];
     }];
 }
@@ -140,24 +134,20 @@
  */
 - (void)refreshControlStateChange:(UIRefreshControl *)refresh
 {
-    AFHTTPRequestOperationManager *manage = [AFHTTPRequestOperationManager manager];
-    
-    //封装请求参数
+        //封装请求参数
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    
     params[@"access_token"] = [[MyAccountTool account] access_token];
     MyStatus *firstStatus = [self.statuses firstObject];
-    
+
     if (firstStatus) {
         // since_id 	false 	int64 	若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
         params[@"since_id"] = firstStatus.idstr;
     }
-    [manage GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSArray *statusArray = responseObject[@"statuses"];
-        
+    [MyHTTPTool get:@"https://api.weibo.com/2/statuses/home_timeline.json" params:params success:^(id json) {
+        NSArray *statusArray = json[@"statuses"];
+
         NSArray *newStatuses = [MyStatus objectArrayWithKeyValuesArray:statusArray];  //数组转模型
-        NSLog(@"%@",newStatuses);
+        //NSLog(@"%@",newStatuses);
         
         /****************************将一个数组中得所有对象插入另一个数组的索引位置******************************************/
         
@@ -166,14 +156,13 @@
         NSRange range = NSMakeRange(0, newStatuses.count);
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
         [self.statuses insertObjects:newStatuses atIndexes:indexSet];
-//        NSLog(@"----------%@",self.statuses.count);
+//      NSLog(@"----------%@",self.statuses.count);
         //刷新tableView
         [self.tableView reloadData];
         [refresh endRefreshing];
         //显示新的微博数量
         [self showNewStatusCount:(int)newStatuses.count];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSError *error) {
         NSLog(@"刷新失败");
         [refresh endRefreshing];
     }];
@@ -238,26 +227,22 @@
  */
 - (void)loadNewStatus
 {
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     params[@"access_token"] = [[MyAccountTool account] access_token];
     //NSLog(@"-----------%@",[[MyAccountTool account] access_token]);
     
-    [mgr GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
+    [MyHTTPTool get:@"https://api.weibo.com/2/statuses/home_timeline.json" params:params success:^(id json) {
 //        NSLog(@"请求成功------%@",responseObject[@"statuses"]);
 //        NSLog(@"----%@",[responseObject class]);
-        NSArray *statusArray = responseObject[@"statuses"];
+        NSArray *statusArray = json[@"statuses"];
         self.statuses = [MyStatus objectArrayWithKeyValuesArray:statusArray];
         
 //        for (id object in self.statuses) {
 //            NSLog(@"----%@-----%@",[object class],object);
 //        }
         [self.tableView reloadData];
+    } failure:^(NSError *error) {
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"请求失败------%@",error);
     }];
 }
 
@@ -349,7 +334,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Potentially incomplete method implementation.
-    // Return the number of sections.
+    
+    self.footView.hidden = !self.statuses.count; //要写在这个地方
     return 1;
 }
 

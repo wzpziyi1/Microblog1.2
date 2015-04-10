@@ -15,7 +15,7 @@
 #import "SDImageCache.h"
 #import "SDWebImageManager.h"
 
-#import "AFNetworking.h"
+#import "MyHTTPTool.h"
 #import "MBProgressHUD+MJ.h"
 
 @interface AppDelegate ()
@@ -45,29 +45,31 @@
     
 //    [UIApplication sharedApplication].keyWindow
     
-    //监控网络状态
-    AFNetworkReachabilityManager *manage = [AFNetworkReachabilityManager sharedManager];
+//    //监控网络状态
+//    AFNetworkReachabilityManager *manage = [AFNetworkReachabilityManager sharedManager];
+//    
+//    [manage setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+//        switch (status) {
+//            case AFNetworkReachabilityStatusUnknown: // 未知网络
+//            case AFNetworkReachabilityStatusNotReachable: // 没有网络(断网)
+//                NSLog(@"没有网络(断网)");
+//                [MBProgressHUD showError:@"网络异常，请检查网络设置！"];
+//                break;
+//                
+//            case AFNetworkReachabilityStatusReachableViaWWAN: // 手机自带网络
+//                NSLog(@"手机自带网络");
+//                break;
+//                
+//            case AFNetworkReachabilityStatusReachableViaWiFi: // WIFI
+//                NSLog(@"WIFI");
+//                break;
+//
+//        }
+//    }];
+//    // 开始监控
+//    [manage startMonitoring];
     
-    [manage setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        switch (status) {
-            case AFNetworkReachabilityStatusUnknown: // 未知网络
-            case AFNetworkReachabilityStatusNotReachable: // 没有网络(断网)
-                NSLog(@"没有网络(断网)");
-                [MBProgressHUD showError:@"网络异常，请检查网络设置！"];
-                break;
-                
-            case AFNetworkReachabilityStatusReachableViaWWAN: // 手机自带网络
-                NSLog(@"手机自带网络");
-                break;
-                
-            case AFNetworkReachabilityStatusReachableViaWiFi: // WIFI
-                NSLog(@"WIFI");
-                break;
-
-        }
-    }];
-    // 开始监控
-    [manage startMonitoring];
+    [MyHTTPTool setReachabilityStatusChangeBlock];
     return YES;
 }
 

@@ -20,11 +20,11 @@
     NSLog(@"%@",account);
     
     NSDate *now = [NSDate date];
-    NSLog(@"--now--%@---account.expires_time---%@",now,account.expires_time);
+//    NSLog(@"--now--%@---account.expires_time---%@",now,account.expires_time);
     
     if ([now compare:account.expires_time] != NSOrderedAscending) {
         account = nil;
-        NSLog(@"-----------====");
+//        NSLog(@"-----------====");
     }
     return account;
 }
