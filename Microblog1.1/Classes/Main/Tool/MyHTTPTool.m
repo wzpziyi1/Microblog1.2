@@ -10,7 +10,9 @@
 #import "AFNetworking.h"
 #import "MBProgressHUD+MJ.h"
 
-@implementation MyHTTPTool
+
+
+@implementation MyHTTPTool 
 
 + (void)get:(NSString *)urlStr params:(id)params success:(void (^)(id json))success failure:(void (^)(NSError *error))failure
 {
@@ -44,12 +46,12 @@
     }];
 }
 
-+ (void)post:(NSString *)urlStr params:(id)params constructingBodyWithBlock:(void (^)(id forData))construct success:(void (^)(id json))success failure:(void (^)(NSError *error))failure
++ (void)post:(NSString *)urlStr params:(id)params data:(NSData *)data name:(NSString *)name fileName:(NSString *)fileName mimeType:(NSString *)mimeType success:(void (^)(id json))success failure:(void (^)(NSError *error))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     [manager POST:urlStr parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        construct(formData);
+        [formData appendPartWithFileData:data name:name fileName:fileName mimeType:mimeType];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

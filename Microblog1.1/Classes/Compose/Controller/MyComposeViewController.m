@@ -12,11 +12,18 @@
 
 #import "MyTextView.h"
 #import "MyComposeToolBar.h"
+#import "MyShowPhotoView.h"
 
-
+#import "MyHTTPTool.h"
+#import "MyAccountTool.h"
+#import "MyAccount.h"
+#import "MJExtension.h"
+#import "MBProgressHUD+MJ.h"
 @interface MyComposeViewController () <UITextViewDelegate, MyComposeToolBarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
 @property (nonatomic, weak) MyTextView *textView;
 @property (nonatomic, weak) MyComposeToolBar *toolBar;
+@property (nonatomic, weak) MyShowPhotoView *photoView;
 @end
 
 @implementation MyComposeViewController
@@ -30,6 +37,9 @@
     
     //添加ToolBar
     [self addToolBar];
+    
+    //添加相册
+    [self addPhotoView];
 }
 
 /**
@@ -43,6 +53,16 @@
     toolBar.delegate = self; //设置代理
     
     [self.view addSubview:toolBar];
+}
+/**
+ *  添加相册显示
+ */
+- (void)addPhotoView
+{
+    MyShowPhotoView *photoView = [[MyShowPhotoView alloc] initWithFrame:CGRectMake(0, 70, self.view.frame.size.width, self.view.frame.size.height)];
+    self.photoView = photoView;
+    //[photoView setBackgroundColor:[UIColor redColor]];
+    [self.textView addSubview:photoView];            //这里必须放在textView上，放在self.view 上是不正确的
 }
 
 #pragma mark - 键盘处理
@@ -176,16 +196,62 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
+/**
+ *  发送微博
+ */
 - (void)send
 {
+    if (self.photoView.subviews.count) {
+        [self sendStatusWithImage];
+    }
+    else
+    {
+        [self sendStatusWithoutImage];
+    }
     
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/**
+ *  发表有图片微博
+ */
+- (void)sendStatusWithImage
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"access_token"] = [[MyAccountTool account] access_token];
+    params[@"status"] = self.textView.text;
+    
+    UIImage *image = [self.photoView.imageArray firstObject];
+    
+    NSData *data = UIImageJPEGRepresentation(image, 1.0);
+    
+    [MyHTTPTool post:@"https://upload.api.weibo.com/2/statuses/upload.json" params:params data:data name:@"pic" fileName:@"status.jpg" mimeType:@"image/jpeg" success:^(id json) {
+        [MBProgressHUD showSuccess:@"发送成功..."];
+    } failure:^(NSError *error) {
+        [MBProgressHUD showSuccess:@"发送失败..."];
+    }];
+    
+}
+/**
+ *  发表无图片微博
+ */
+- (void)sendStatusWithoutImage
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"access_token"] = [[MyAccountTool account] access_token];
+    params[@"status"] = self.textView.text;
+    
+    [MyHTTPTool post:@"https://api.weibo.com/2/statuses/update.json" params:params success:^(id json) {
+        
+        [MBProgressHUD showSuccess:@"发表成功..."];
+    } failure:^(NSError *error) {
+        [MBProgressHUD showError:@"发表失败..."];
+    }];
+}
 
 #pragma mark -- 相机、相册问题
 /*************打开手机相机、相册等问题************************/
@@ -268,6 +334,10 @@
     
     // 1.取出选中的图片
     UIImage *image = info[UIImagePickerControllerOriginalImage];
+    
+    // 2.添加到photoView上
+    [self.photoView addImage:image];
+    
 }
 
 

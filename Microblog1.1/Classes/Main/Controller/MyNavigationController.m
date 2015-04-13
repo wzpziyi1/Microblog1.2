@@ -106,7 +106,7 @@
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
 #warning 注意导航控制器这里的情况
-    if (self.childViewControllers.count > 0) {   //这里应该是slef，而不是viewController，因为当前的控制器就是viewController所在的导航控制器
+    if (self.childViewControllers.count > 0) {   //这里应该是self，而不是viewController，因为当前的控制器就是viewController所在的导航控制器
         
         viewController.hidesBottomBarWhenPushed = YES;
         

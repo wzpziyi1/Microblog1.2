@@ -21,6 +21,7 @@
 		09A1FECD1ABC450700556B64 /* MyDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A1FECC1ABC450700556B64 /* MyDiscoverViewController.m */; };
 		09A1FED01ABC452100556B64 /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A1FECF1ABC452100556B64 /* MyProfileViewController.m */; };
 		09A1FED31ABC58FC00556B64 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A1FED21ABC58FC00556B64 /* UIImage+Extension.m */; };
+		09A3AD931ADB5D8A00E8BAE0 /* MyShowPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A3AD921ADB5D8A00E8BAE0 /* MyShowPhotoView.m */; };
 		09A98FFE1AC80924001DB137 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A98FBA1AC80924001DB137 /* AFHTTPRequestOperation.m */; };
 		09A98FFF1AC80924001DB137 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A98FBC1AC80924001DB137 /* AFHTTPRequestOperationManager.m */; };
 		09A990001AC80924001DB137 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 09A98FBE1AC80924001DB137 /* AFHTTPSessionManager.m */; };
@@ -114,6 +115,8 @@
 		09A1FECF1ABC452100556B64 /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
 		09A1FED11ABC58FC00556B64 /* UIImage+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extension.h"; sourceTree = "<group>"; };
 		09A1FED21ABC58FC00556B64 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
+		09A3AD911ADB5D8A00E8BAE0 /* MyShowPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShowPhotoView.h; sourceTree = "<group>"; };
+		09A3AD921ADB5D8A00E8BAE0 /* MyShowPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShowPhotoView.m; sourceTree = "<group>"; };
 		09A58D931AC9033F00D8F59A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		09A98FB91AC80924001DB137 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		09A98FBA1AC80924001DB137 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -698,6 +701,8 @@
 				09CB93871AD186DB00D449F2 /* MyTextView.m */,
 				09E6B7F11AD408A3001DEF56 /* MyComposeToolBar.h */,
 				09E6B7F21AD408A3001DEF56 /* MyComposeToolBar.m */,
+				09A3AD911ADB5D8A00E8BAE0 /* MyShowPhotoView.h */,
+				09A3AD921ADB5D8A00E8BAE0 /* MyShowPhotoView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -850,6 +855,7 @@
 				09A990191AC80924001DB137 /* UIImage+MultiFormat.m in Sources */,
 				09CF22D41ABED386009DDBFA /* MySearchBar.m in Sources */,
 				09A990131AC80924001DB137 /* SDWebImageDownloader.m in Sources */,
+				09A3AD931ADB5D8A00E8BAE0 /* MyShowPhotoView.m in Sources */,
 				09B751801AC2BB5A00F03084 /* MyNewfeatureViewController.m in Sources */,
 				09A9901A1AC80924001DB137 /* UIImage+WebP.m in Sources */,
 				09CB938B1AD19AA900D449F2 /* MyFootView.m in Sources */,
