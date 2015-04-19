@@ -19,6 +19,9 @@
 #import "MyAccount.h"
 #import "MJExtension.h"
 #import "MBProgressHUD+MJ.h"
+
+#import "MySendStatusParam.h"
+#import "MyStatusTool.h"
 @interface MyComposeViewController () <UITextViewDelegate, MyComposeToolBarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, weak) MyTextView *textView;
@@ -241,15 +244,16 @@
  */
 - (void)sendStatusWithoutImage
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"access_token"] = [[MyAccountTool account] access_token];
-    params[@"status"] = self.textView.text;
+    // 1.封装请求参数
+    MySendStatusParam *param = [[MySendStatusParam alloc] init];
+    param.access_token = [[MyAccountTool account] access_token];
+    param.status = self.textView.text;
     
-    [MyHTTPTool post:@"https://api.weibo.com/2/statuses/update.json" params:params success:^(id json) {
-        
-        [MBProgressHUD showSuccess:@"发表成功..."];
+    // 2.发微博
+    [MyStatusTool sendStatusWithParam:param success:^(MySendStatusResult *result) {
+        [MBProgressHUD showSuccess:@"发表成功"];
     } failure:^(NSError *error) {
-        [MBProgressHUD showError:@"发表失败..."];
+        [MBProgressHUD showError:@"发表失败"];
     }];
 }
 

@@ -16,7 +16,7 @@
     account.expires_in = dict[@"expires_in"];
     account.access_token = dict[@"access_token"];
     account.uid = dict[@"uid"];
-    
+    account.name = dict[@"name"];
     //获取现在时间
     NSDate *now = [NSDate date];
     //计算账号过期时间
@@ -31,7 +31,7 @@
         self.access_token = [decode decodeObjectForKey:@"access_token"];
         self.uid = [decode decodeObjectForKey:@"uid"];
         self.expires_time = [decode decodeObjectForKey:@"expires_time"];
-
+        self.name = [decode decodeObjectForKey:@"name"];
     }
     return self;
 }
@@ -41,6 +41,7 @@
     [encode encodeObject:self.access_token forKey:@"access_token"];
     [encode encodeObject:self.uid forKey:@"uid"];
     [encode encodeObject:self.expires_time forKey:@"expires_time"];
+    [encode encodeObject:self.name forKey:@"name"];
 }
 
 @end

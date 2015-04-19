@@ -17,7 +17,7 @@
 {
     MyAccount *account = [NSKeyedUnarchiver unarchiveObjectWithFile:accountPath];
     
-    NSLog(@"%@",account);
+    //NSLog(@"%@",account);
     
     NSDate *now = [NSDate date];
 //    NSLog(@"--now--%@---account.expires_time---%@",now,account.expires_time);
@@ -31,5 +31,9 @@
 + (void)save:(MyAccount *)account
 {
     [NSKeyedArchiver archiveRootObject:account toFile:accountPath];
+}
++ (void)accessTokenWithParam:(MyAccessTokenParam *)param success:(void (^)(MyAccount *))success failure:(void (^)(NSError *))failure
+{
+    [self postWithUrl:@"https://api.weibo.com/oauth2/access_token" param:param resultClass:[MyAccount class] success:success failure:failure];
 }
 @end

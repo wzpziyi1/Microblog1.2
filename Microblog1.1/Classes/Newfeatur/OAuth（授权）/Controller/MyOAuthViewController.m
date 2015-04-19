@@ -13,6 +13,8 @@
 #import "MyAccount.h"
 #import "MyControllerTool.h"
 #import "MyAccountTool.h"
+#import "MyAccessTokenParam.h"
+
 
 #define MyAppKey @"3722612068"
 #define MyRedirectURI @"http://www.cnblogs.com/"
@@ -72,7 +74,7 @@
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *url = request.URL.absoluteString;
-   // NSLog(@"url-------%@",url);
+    NSLog(@"url-------%@",url);
     NSString *str = [NSString stringWithFormat:@"%@?code=",MyRedirectURI];
    // NSLog(@"str-------%@",str);
     NSRange range = [url rangeOfString:str];
@@ -115,26 +117,44 @@
 //        NSLog(@"请求失败------%@",error);
 //    }];
     
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    
+//    params[@"client_id"] = MyAppKey;
+//    params[@"client_secret"] = MyAppSecret;
+//    params[@"redirect_uri"] = MyRedirectURI;
+//    params[@"grant_type"] = @"authorization_code";
+//    params[@"code"] = code;
+//    
+//    [MyHTTPTool post:@"https://api.weibo.com/oauth2/access_token" params:params success:^(id json) {
+//            [MBProgressHUD hideHUD];
+//        //    NSLog(@"请求成功------%@",responseObject);
+//            MyAccount *account = [MyAccount accountWithDict:json];
+//            [MyAccountTool save:account];
+//            account = [MyAccountTool account];
+//            [MyControllerTool chooseRootViewController];
+//    } failure:^(NSError *error) {
+//            [MBProgressHUD hideHUD];
+//            NSLog(@"请求失败------%@",error);
+//    }];
     
-    params[@"client_id"] = MyAppKey;
-    params[@"client_secret"] = MyAppSecret;
-    params[@"redirect_uri"] = MyRedirectURI;
-    params[@"grant_type"] = @"authorization_code";
-    params[@"code"] = code;
-    
-    [MyHTTPTool post:@"https://api.weibo.com/oauth2/access_token" params:params success:^(id json) {
-            [MBProgressHUD hideHUD];
-        //    NSLog(@"请求成功------%@",responseObject);
-            MyAccount *account = [MyAccount accountWithDict:json];
-            [MyAccountTool save:account];
-            account = [MyAccountTool account];
-            [MyControllerTool chooseRootViewController];
+    MyAccessTokenParam *param = [[MyAccessTokenParam alloc] init];
+    param.client_id = MyAppKey;
+    param.client_secret = MyAppSecret;
+    param.redirect_uri = MyRedirectURI;
+    param.grant_type = @"authorization_code";
+    param.code = code;
+
+    [MyAccountTool accessTokenWithParam:param success:^(MyAccount *account) {
+        [MBProgressHUD hideHUD];
+        
+        [MyAccountTool save:account];
+        
+        [MyControllerTool chooseRootViewController];
     } failure:^(NSError *error) {
-            [MBProgressHUD hideHUD];
-            NSLog(@"请求失败------%@",error);
+        [MBProgressHUD hideHUD];
+        
+        NSLog(@"请求失败--%@", error);
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning {

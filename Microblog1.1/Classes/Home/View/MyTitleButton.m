@@ -28,6 +28,19 @@
     return self;
 }
 
+- (void)setTitle:(NSString *)title forState:(UIControlState)state
+{
+    [super setTitle:title forState:state];
+    
+    // 1.计算文字的尺寸
+    CGSize titleSize = [title sizeWithFont:self.titleLabel.font];
+    
+    // 2.计算按钮的宽度
+    CGRect frame = self.frame;
+    frame.size.width =titleSize.width + self.frame.size.height + 10;
+    self.frame = frame;
+}
+
 - (CGRect)imageRectForContentRect:(CGRect)contentRect  //重写此方法，调整图片位置
 {
     CGFloat imageH = self.frame.size.height;

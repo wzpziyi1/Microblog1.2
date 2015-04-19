@@ -26,6 +26,11 @@
 #import "MyAccount.h"
 
 #import "MyFootView.h"
+#import "MyUserInfoParam.h"
+#import "MyUserTool.h"
+#import "MyUserInfoResult.h"
+#import "MyHomeStatusesParam.h"
+#import "MyStatusTool.h"
 
 #define ID @"homeCell"
 @interface MyHomeViewController ()<MyPopMenuDelegate, UIScrollViewDelegate>
@@ -33,6 +38,8 @@
 @property (nonatomic, strong) NSMutableArray *statuses;
 
 @property (nonatomic, weak) MyFootView *footView;
+
+@property (nonatomic, weak) MyTitleButton *titleButton;
 @end
 
 @implementation MyHomeViewController
@@ -53,8 +60,8 @@
     [self setNavigationBar];
     
 //    
-//    //加载微博数据
-//    [self loadNewStatus];
+    //设置用户昵称
+    [self setupUserInfo];
     
     //刷新数据
     [self setupRefresh];
@@ -93,25 +100,44 @@
  */
 - (void)loadMoreStatus
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"access_token"] = [[MyAccountTool account] access_token];
-    MyStatus *lastStatus = [self.statuses lastObject];
-    
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    params[@"access_token"] = [[MyAccountTool account] access_token];
+//    MyStatus *lastStatus = [self.statuses lastObject];
+//    
+//    if (lastStatus) {
+//        // max_id	false	int64	若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
+//        params[@"max_id"] = @([lastStatus.idstr longLongValue] - 1);
+//    }
+//    [MyHTTPTool get:@"https://api.weibo.com/2/statuses/home_timeline.json" params:params success:^(id json) {
+//        NSArray *StatusArray = json[@"statuses"];
+//        NSArray *oldStatuses = [MyStatus objectArrayWithKeyValuesArray:StatusArray];
+//
+//        // 将新数据插入到旧数据的最后面
+//        [self.statuses addObjectsFromArray:oldStatuses];
+//
+//        [self.tableView reloadData];
+//                
+//        [self.footView endLoad];
+//    } failure:^(NSError *error) {
+//        [self.footView endLoad];
+//    }];
+    MyHomeStatusesParam *param = [[MyHomeStatusesParam alloc] init];
+    param.access_token = [[MyAccountTool account] access_token];
+    MyStatus *lastStatus =  [self.statuses lastObject];
     if (lastStatus) {
-        // max_id	false	int64	若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
-        params[@"max_id"] = @([lastStatus.idstr longLongValue] - 1);
+        param.max_id = @([lastStatus.idstr longLongValue] - 1);
     }
-    [MyHTTPTool get:@"https://api.weibo.com/2/statuses/home_timeline.json" params:params success:^(id json) {
-        NSArray *StatusArray = json[@"statuses"];
-        NSArray *oldStatuses = [MyStatus objectArrayWithKeyValuesArray:StatusArray];
-
-        // 将新数据插入到旧数据的最后面
-        [self.statuses addObjectsFromArray:oldStatuses];
-
+    
+    [MyStatusTool homeStatusesWithParam:param success:^(MyHomeStatusesResult *result) {
+        NSArray *newStatuses = result.statuses;
+        
+        [self.statuses addObjectsFromArray:newStatuses];
+        
         [self.tableView reloadData];
-                
+        
         [self.footView endLoad];
     } failure:^(NSError *error) {
+        NSLog(@"请求失败--%@", error);
         [self.footView endLoad];
     }];
 }
@@ -134,36 +160,61 @@
  */
 - (void)refreshControlStateChange:(UIRefreshControl *)refresh
 {
-        //封装请求参数
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    params[@"access_token"] = [[MyAccountTool account] access_token];
-    MyStatus *firstStatus = [self.statuses firstObject];
-
+//        //封装请求参数
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    params[@"access_token"] = [[MyAccountTool account] access_token];
+//    MyStatus *firstStatus = [self.statuses firstObject];
+//
+//    if (firstStatus) {
+//        // since_id 	false 	int64 	若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
+//        params[@"since_id"] = firstStatus.idstr;
+//    }
+//    [MyHTTPTool get:@"https://api.weibo.com/2/statuses/home_timeline.json" params:params success:^(id json) {
+//        NSArray *statusArray = json[@"statuses"];
+//
+//        NSArray *newStatuses = [MyStatus objectArrayWithKeyValuesArray:statusArray];  //数组转模型
+//        //NSLog(@"%@",newStatuses);
+//        
+//        /****************************将一个数组中得所有对象插入另一个数组的索引位置******************************************/
+//        
+//        //        [self.statuses insertObject:statusArray atIndex:0];   //这个函数，是将一个数组当成一个对象插入到另一个数组的索引位置
+//        
+//        NSRange range = NSMakeRange(0, newStatuses.count);
+//        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+//        [self.statuses insertObjects:newStatuses atIndexes:indexSet];
+////      NSLog(@"----------%@",self.statuses.count);
+//        //刷新tableView
+//        [self.tableView reloadData];
+//        [refresh endRefreshing];
+//        //显示新的微博数量
+//        [self showNewStatusCount:(int)newStatuses.count];
+//    } failure:^(NSError *error) {
+//        NSLog(@"刷新失败");
+//        [refresh endRefreshing];
+//    }];
+    // 1.封装请求参数
+    MyHomeStatusesParam *param = [[MyHomeStatusesParam alloc] init];
+    param.access_token = [[MyAccountTool account] access_token];
+    MyStatus *firstStatus =  [self.statuses firstObject];
     if (firstStatus) {
-        // since_id 	false 	int64 	若指定此参数，则返回ID比since_id大的微博（即比since_id时间晚的微博），默认为0。
-        params[@"since_id"] = firstStatus.idstr;
+        param.since_id = @([firstStatus.idstr longLongValue]);
     }
-    [MyHTTPTool get:@"https://api.weibo.com/2/statuses/home_timeline.json" params:params success:^(id json) {
-        NSArray *statusArray = json[@"statuses"];
-
-        NSArray *newStatuses = [MyStatus objectArrayWithKeyValuesArray:statusArray];  //数组转模型
-        //NSLog(@"%@",newStatuses);
-        
-        /****************************将一个数组中得所有对象插入另一个数组的索引位置******************************************/
-        
-        //        [self.statuses insertObject:statusArray atIndex:0];   //这个函数，是将一个数组当成一个对象插入到另一个数组的索引位置
+    
+    // 2.加载微博数据
+    [MyStatusTool homeStatusesWithParam:param success:^(MyHomeStatusesResult *result) {
+        NSArray *newStatuses = result.statuses;
         
         NSRange range = NSMakeRange(0, newStatuses.count);
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
         [self.statuses insertObjects:newStatuses atIndexes:indexSet];
-//      NSLog(@"----------%@",self.statuses.count);
-        //刷新tableView
+        
         [self.tableView reloadData];
+        
         [refresh endRefreshing];
-        //显示新的微博数量
+        
         [self showNewStatusCount:(int)newStatuses.count];
     } failure:^(NSError *error) {
-        NSLog(@"刷新失败");
+        NSLog(@"请求失败--%@", error);
         [refresh endRefreshing];
     }];
 }
@@ -223,26 +274,43 @@
 }
 
 /**
- *  开始加载微博数据
+ *  设置用户昵称
  */
-- (void)loadNewStatus
+- (void)setupUserInfo
 {
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    params[@"access_token"] = [[MyAccountTool account] access_token];
-    //NSLog(@"-----------%@",[[MyAccountTool account] access_token]);
+//    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+//    params[@"access_token"] = [[MyAccountTool account] access_token];
+//    //NSLog(@"-----------%@",[[MyAccountTool account] access_token]);
+//    
+//    [MyHTTPTool get:@"https://api.weibo.com/2/statuses/home_timeline.json" params:params success:^(id json) {
+////        NSLog(@"请求成功------%@",responseObject[@"statuses"]);
+////        NSLog(@"----%@",[responseObject class]);
+//        NSArray *statusArray = json[@"statuses"];
+//        self.statuses = [MyStatus objectArrayWithKeyValuesArray:statusArray];
+//        
+////        for (id object in self.statuses) {
+////            NSLog(@"----%@-----%@",[object class],object);
+////        }
+//        [self.tableView reloadData];
+//    } failure:^(NSError *error) {
+//        
+//    }];
+    // 1.封装请求参数
+    MyUserInfoParam *param = [[MyUserInfoParam alloc] init];
+    param.access_token = [[MyAccountTool account] access_token];
+    param.uid = [[MyAccountTool account] uid];
     
-    [MyHTTPTool get:@"https://api.weibo.com/2/statuses/home_timeline.json" params:params success:^(id json) {
-//        NSLog(@"请求成功------%@",responseObject[@"statuses"]);
-//        NSLog(@"----%@",[responseObject class]);
-        NSArray *statusArray = json[@"statuses"];
-        self.statuses = [MyStatus objectArrayWithKeyValuesArray:statusArray];
+    // 2.加载用户信息
+    [MyUserTool userInfoWithParam:param success:^(MyUserInfoResult *user) {
+        // 设置用户的昵称为标题
+        [self.titleButton setTitle:user.name forState:UIControlStateNormal];
         
-//        for (id object in self.statuses) {
-//            NSLog(@"----%@-----%@",[object class],object);
-//        }
-        [self.tableView reloadData];
+        // 存储帐号信息
+        MyAccount *account = [MyAccountTool account];
+        account.name = user.name;
+        [MyAccountTool save:account];
     } failure:^(NSError *error) {
-        
+        NSLog(@"请求失败-------%@", error);
     }];
 }
 
@@ -281,6 +349,7 @@
     //设置导航栏标题
     MyTitleButton *titleBnt = [[MyTitleButton alloc] init];
     titleBnt.frame = CGRectMake(0, 0, 100, 35);
+    self.titleButton = titleBnt;
     [titleBnt setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [titleBnt setTitle:@"首页" forState:UIControlStateNormal];
     [titleBnt setImage:[UIImage imageWithName:@"navigationbar_arrow_down"] forState:UIControlStateNormal];

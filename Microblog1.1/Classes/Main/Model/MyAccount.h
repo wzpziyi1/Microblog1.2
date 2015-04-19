@@ -21,5 +21,10 @@
 /** string 	当前授权用户的UID。*/
 @property (nonatomic, copy) NSString *uid;
 
+/**
+ *  用户昵称
+ */
+@property (nonatomic, copy) NSString *name;
+
 + (id)accountWithDict:(NSDictionary *)dict;
 @end
