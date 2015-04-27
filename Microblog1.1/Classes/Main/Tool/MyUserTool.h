@@ -9,7 +9,7 @@
 #import "MyBaseTool.h"
 
 
-@class MyUserInfoResult,MyUserInfoParam;
+@class MyUserInfoResult, MyUserInfoParam, MyUnreadCountParam, MyUnreadCountResult;
 @interface MyUserTool : MyBaseTool
 /**
  *  加载用户的个人信息
@@ -19,4 +19,6 @@
  *  @param failure 请求失败后的回调（请将请求失败后想做的事情写到这个block中）
  */
 + (void)userInfoWithParam:(MyUserInfoParam *)param success:(void (^)(MyUserInfoResult *result))success failure:(void (^)(NSError *error))failure;
+
++ (void)unreadCountWithParam:(MyUnreadCountParam *)param success:(void (^)(MyUnreadCountResult *result))success failure:(void (^)(NSError *error))failure;
 @end

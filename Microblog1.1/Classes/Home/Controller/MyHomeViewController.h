@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface MyHomeViewController : UITableViewController
-
+/**
+ *  刷新
+ *
+ */
+- (void)refresh:(BOOL)flg;
 @end

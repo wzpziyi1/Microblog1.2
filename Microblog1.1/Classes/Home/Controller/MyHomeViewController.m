@@ -40,6 +40,8 @@
 @property (nonatomic, weak) MyFootView *footView;
 
 @property (nonatomic, weak) MyTitleButton *titleButton;
+
+@property (nonatomic, weak) UIRefreshControl *refreshControl;
 @end
 
 @implementation MyHomeViewController
@@ -146,6 +148,7 @@
 {
     UIRefreshControl *refresh = [[UIRefreshControl alloc] init]; //上拉刷新控件
     [self.tableView addSubview:refresh];
+    self.refreshControl = refresh;
     
     [refresh addTarget:self action:@selector(refreshControlStateChange:) forControlEvents:UIControlEventValueChanged]; //在UIRefreshControl里面是没有方法可以监听值改变的，但是UIRefreshControl继承自UIControll，从而可以监听值得改变，做到上拉刷新操作
     
@@ -443,5 +446,18 @@
     [newVc.view setBackgroundColor:[UIColor redColor]];
     [newVc.navigationController setTitle:@"新控制器"];
     [self.navigationController pushViewController:newVc animated:YES];
+}
+
+- (void)refresh:(BOOL)flg
+{
+    if (self.tabBarItem.badgeValue) {
+        [self.refreshControl beginRefreshing];
+        [self refreshControlStateChange:self.refreshControl];
+    }else if (flg)
+    {
+        // 让表格回到最顶部
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+    }
 }
 @end

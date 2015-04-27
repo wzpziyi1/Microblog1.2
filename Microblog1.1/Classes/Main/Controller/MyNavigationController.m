@@ -125,6 +125,8 @@
 - (void)more
 {
     [self popToRootViewControllerAnimated:YES];
+    
+    
 }
 
 /*
