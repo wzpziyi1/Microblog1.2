@@ -32,27 +32,51 @@
 #import "MyHomeStatusesParam.h"
 #import "MyStatusTool.h"
 
-#define ID @"homeCell"
+#import "MyStatusCell.h"
+#import "MyStatusFrame.h"
 @interface MyHomeViewController ()<MyPopMenuDelegate, UIScrollViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray *statuses;
 
 @property (nonatomic, weak) MyFootView *footView;
 
 @property (nonatomic, weak) MyTitleButton *titleButton;
 
 @property (nonatomic, weak) UIRefreshControl *refreshControl;
+
+/**
+ *  微博数组(存放着所有的微博frame数据)
+ */
+@property (nonatomic, strong) NSMutableArray *statusFrames;
 @end
 
 @implementation MyHomeViewController
 
-- (NSMutableArray *)statuses
+- (NSMutableArray *)statusFrames
 {
-    if (_statuses == nil) {
-        _statuses = [NSMutableArray array];
+    if (_statusFrames == nil) {
+        _statusFrames = [NSMutableArray array];
     }
-    return _statuses;
+    return _statusFrames;
 }
+
+/**
+ *  根据微博模型数组 转成 微博frame模型数据
+ *
+ *  @param statuses 微博模型数组
+ *
+ */
+- (NSArray *)statusFramesWithStatuses:(NSArray *)statuses
+{
+    NSMutableArray *frames = [NSMutableArray array];
+    for (MyStatus *status in statuses) {
+        MyStatusFrame *frame = [[MyStatusFrame alloc] init];
+        // 传递微博模型数据，计算所有子控件的frame
+        frame.status = status;
+        [frames addObject:frame];
+    }
+    return frames;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,7 +104,7 @@
  */
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (self.statuses.count <= 0 || self.footView.isRefreshing) {
+    if (self.statusFrames.count <= 0 || self.footView.isRefreshing) {
         return;
     }
     //差距
@@ -123,17 +147,20 @@
 //    } failure:^(NSError *error) {
 //        [self.footView endLoad];
 //    }];
-    MyHomeStatusesParam *param = [[MyHomeStatusesParam alloc] init];
-    param.access_token = [[MyAccountTool account] access_token];
-    MyStatus *lastStatus =  [self.statuses lastObject];
+    MyHomeStatusesParam *param = [MyHomeStatusesParam param];
+    MyStatusFrame *lastStatusFrame =  [self.statusFrames lastObject];
+    MyStatus *lastStatus = lastStatusFrame.status;
     if (lastStatus) {
         param.max_id = @([lastStatus.idstr longLongValue] - 1);
     }
     
     [MyStatusTool homeStatusesWithParam:param success:^(MyHomeStatusesResult *result) {
-        NSArray *newStatuses = result.statuses;
         
-        [self.statuses addObjectsFromArray:newStatuses];
+        // 获得最新的微博frame数组
+        NSArray *newFrames = [self statusFramesWithStatuses:result.statuses];
+        
+        // 将新数据插入到旧数据的最后面
+        [self.statusFrames addObjectsFromArray:newFrames];
         
         [self.tableView reloadData];
         
@@ -195,27 +222,29 @@
 //        NSLog(@"刷新失败");
 //        [refresh endRefreshing];
 //    }];
-    // 1.封装请求参数
-    MyHomeStatusesParam *param = [[MyHomeStatusesParam alloc] init];
-    param.access_token = [[MyAccountTool account] access_token];
-    MyStatus *firstStatus =  [self.statuses firstObject];
+    // 封装请求参数
+    MyHomeStatusesParam *param = [MyHomeStatusesParam param];
+    MyStatusFrame *firstStatusFrame =  [self.statusFrames firstObject];
+    MyStatus *firstStatus = firstStatusFrame.status;
     if (firstStatus) {
         param.since_id = @([firstStatus.idstr longLongValue]);
     }
     
-    // 2.加载微博数据
+    // 加载微博数据
     [MyStatusTool homeStatusesWithParam:param success:^(MyHomeStatusesResult *result) {
-        NSArray *newStatuses = result.statuses;
+        // 获得最新的微博frame数组
+        NSArray *newFrames = [self statusFramesWithStatuses:result.statuses];
         
-        NSRange range = NSMakeRange(0, newStatuses.count);
+        // 将新数据插入到旧数据的最前面
+        NSRange range = NSMakeRange(0, newFrames.count);
         NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
-        [self.statuses insertObjects:newStatuses atIndexes:indexSet];
+        [self.statusFrames insertObjects:newFrames atIndexes:indexSet];
         
         [self.tableView reloadData];
         
         [refresh endRefreshing];
         
-        [self showNewStatusCount:(int)newStatuses.count];
+        [self showNewStatusCount:(int)newFrames.count];
     } failure:^(NSError *error) {
         NSLog(@"请求失败--%@", error);
         [refresh endRefreshing];
@@ -407,37 +436,29 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Potentially incomplete method implementation.
     
-    self.footView.hidden = !self.statuses.count; //要写在这个地方
+    self.footView.hidden = !self.statusFrames.count; //要写在这个地方
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.statuses.count;
+    return self.statusFrames.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    MyStatusCell *cell = [MyStatusCell cellWithTableView:tableView];
     
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID forIndexPath:indexPath];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
-    }
-    MyStatus *status = self.statuses[indexPath.row];
-    MyUser *user = status.user;
-    cell.textLabel.text = status.text;
-    cell.detailTextLabel.text = user.name;
-    
-    NSString *imageUrl = user.profile_image_url;
-    
-//    [UIImage imageNamed:]
-        //设置占位图片，下载图片的时候
-    [cell.imageView setImageWithURL:imageUrl placeholderImage:[UIImage imageWithName:@"avatar_default_small"]];
+    cell.statusFrame = self.statusFrames[indexPath.row];
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MyStatusFrame *frame = self.statusFrames[indexPath.row];
+    return frame.cellHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -451,6 +472,7 @@
 - (void)refresh:(BOOL)flg
 {
     if (self.tabBarItem.badgeValue) {
+        self.tabBarItem.badgeValue = nil;
         [self.refreshControl beginRefreshing];
         [self refreshControlStateChange:self.refreshControl];
     }else if (flg)

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		096696CC1AEE7FE700E53631 /* MyStatusFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 096696CB1AEE7FE700E53631 /* MyStatusFrame.m */; };
+		096696CF1AEE81E700E53631 /* MyStatusOriginalFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 096696CE1AEE81E700E53631 /* MyStatusOriginalFrame.m */; };
+		096696D31AEE838D00E53631 /* MyStatusRetweetedFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 096696D21AEE838D00E53631 /* MyStatusRetweetedFrame.m */; };
+		096696D61AEE841200E53631 /* MyStatusDetailFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 096696D51AEE841200E53631 /* MyStatusDetailFrame.m */; };
+		096696D91AEE863900E53631 /* MyStatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 096696D81AEE863900E53631 /* MyStatusCell.m */; };
+		096696DC1AEE879500E53631 /* MyStatusDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096696DB1AEE879500E53631 /* MyStatusDetailView.m */; };
+		096696DF1AEE883F00E53631 /* MyStatusToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 096696DE1AEE883F00E53631 /* MyStatusToolbar.m */; };
+		096696E21AEE888A00E53631 /* MyStatusOriginalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096696E11AEE888A00E53631 /* MyStatusOriginalView.m */; };
+		096696E51AEE89AC00E53631 /* MyStatusRetweetedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 096696E41AEE89AC00E53631 /* MyStatusRetweetedView.m */; };
 		096E513C1AE401B2002F5A66 /* MyBaseParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 096E513B1AE401B2002F5A66 /* MyBaseParam.m */; };
 		096E513F1AE40284002F5A66 /* MyUnreadCountParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 096E513E1AE40284002F5A66 /* MyUnreadCountParam.m */; };
 		096E51451AE4031B002F5A66 /* MyUnreadCountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 096E51441AE4031B002F5A66 /* MyUnreadCountResult.m */; };
@@ -101,6 +110,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		096696CA1AEE7FE700E53631 /* MyStatusFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatusFrame.h; sourceTree = "<group>"; };
+		096696CB1AEE7FE700E53631 /* MyStatusFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatusFrame.m; sourceTree = "<group>"; };
+		096696CD1AEE81E700E53631 /* MyStatusOriginalFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatusOriginalFrame.h; sourceTree = "<group>"; };
+		096696CE1AEE81E700E53631 /* MyStatusOriginalFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatusOriginalFrame.m; sourceTree = "<group>"; };
+		096696D01AEE82F700E53631 /* MyCellCommonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCellCommonData.h; sourceTree = "<group>"; };
+		096696D11AEE838D00E53631 /* MyStatusRetweetedFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatusRetweetedFrame.h; sourceTree = "<group>"; };
+		096696D21AEE838D00E53631 /* MyStatusRetweetedFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatusRetweetedFrame.m; sourceTree = "<group>"; };
+		096696D41AEE841200E53631 /* MyStatusDetailFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatusDetailFrame.h; sourceTree = "<group>"; };
+		096696D51AEE841200E53631 /* MyStatusDetailFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatusDetailFrame.m; sourceTree = "<group>"; };
+		096696D71AEE863900E53631 /* MyStatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatusCell.h; sourceTree = "<group>"; };
+		096696D81AEE863900E53631 /* MyStatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatusCell.m; sourceTree = "<group>"; };
+		096696DA1AEE879500E53631 /* MyStatusDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatusDetailView.h; sourceTree = "<group>"; };
+		096696DB1AEE879500E53631 /* MyStatusDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatusDetailView.m; sourceTree = "<group>"; };
+		096696DD1AEE883F00E53631 /* MyStatusToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatusToolbar.h; sourceTree = "<group>"; };
+		096696DE1AEE883F00E53631 /* MyStatusToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatusToolbar.m; sourceTree = "<group>"; };
+		096696E01AEE888A00E53631 /* MyStatusOriginalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatusOriginalView.h; sourceTree = "<group>"; };
+		096696E11AEE888A00E53631 /* MyStatusOriginalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatusOriginalView.m; sourceTree = "<group>"; };
+		096696E31AEE89AC00E53631 /* MyStatusRetweetedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatusRetweetedView.h; sourceTree = "<group>"; };
+		096696E41AEE89AC00E53631 /* MyStatusRetweetedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatusRetweetedView.m; sourceTree = "<group>"; };
 		096E513A1AE401B2002F5A66 /* MyBaseParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBaseParam.h; sourceTree = "<group>"; };
 		096E513B1AE401B2002F5A66 /* MyBaseParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBaseParam.m; sourceTree = "<group>"; };
 		096E513D1AE40284002F5A66 /* MyUnreadCountParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUnreadCountParam.h; sourceTree = "<group>"; };
@@ -284,6 +312,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		096696C11AEE7CE900E53631 /* Frame */ = {
+			isa = PBXGroup;
+			children = (
+				096696D01AEE82F700E53631 /* MyCellCommonData.h */,
+				096696CA1AEE7FE700E53631 /* MyStatusFrame.h */,
+				096696CB1AEE7FE700E53631 /* MyStatusFrame.m */,
+				096696CD1AEE81E700E53631 /* MyStatusOriginalFrame.h */,
+				096696CE1AEE81E700E53631 /* MyStatusOriginalFrame.m */,
+				096696D11AEE838D00E53631 /* MyStatusRetweetedFrame.h */,
+				096696D21AEE838D00E53631 /* MyStatusRetweetedFrame.m */,
+				096696D41AEE841200E53631 /* MyStatusDetailFrame.h */,
+				096696D51AEE841200E53631 /* MyStatusDetailFrame.m */,
+			);
+			name = Frame;
+			sourceTree = "<group>";
+		};
+		096696C21AEE7CF600E53631 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				096696D71AEE863900E53631 /* MyStatusCell.h */,
+				096696D81AEE863900E53631 /* MyStatusCell.m */,
+				096696DA1AEE879500E53631 /* MyStatusDetailView.h */,
+				096696DB1AEE879500E53631 /* MyStatusDetailView.m */,
+				096696DD1AEE883F00E53631 /* MyStatusToolbar.h */,
+				096696DE1AEE883F00E53631 /* MyStatusToolbar.m */,
+				096696E01AEE888A00E53631 /* MyStatusOriginalView.h */,
+				096696E11AEE888A00E53631 /* MyStatusOriginalView.m */,
+				096696E31AEE89AC00E53631 /* MyStatusRetweetedView.h */,
+				096696E41AEE89AC00E53631 /* MyStatusRetweetedView.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		096E51351AE40077002F5A66 /* UnreadCount */ = {
 			isa = PBXGroup;
 			children = (
@@ -467,6 +528,7 @@
 		09A1FEAC1ABC426D00556B64 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				096696C11AEE7CE900E53631 /* Frame */,
 				09A990331AC83271001DB137 /* MyUser.h */,
 				09A990341AC83271001DB137 /* MyUser.m */,
 				09A990361AC832A8001DB137 /* MyStatus.h */,
@@ -480,6 +542,7 @@
 		09A1FEAD1ABC426D00556B64 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				096696C21AEE7CF600E53631 /* Cell */,
 				09CE68F71ABE723700F9886B /* MyTitleButton.h */,
 				09CE68F81ABE723700F9886B /* MyTitleButton.m */,
 				09CF22D51ABED911009DDBFA /* MyPopMenu.h */,
@@ -950,6 +1013,7 @@
 				097DF64C1AE357350086190F /* MyAccessTokenParam.m in Sources */,
 				09A1FEC21ABC426D00556B64 /* MyNavigationController.m in Sources */,
 				09A1FED01ABC452100556B64 /* MyProfileViewController.m in Sources */,
+				096696DF1AEE883F00E53631 /* MyStatusToolbar.m in Sources */,
 				09A990151AC80924001DB137 /* SDWebImageManager.m in Sources */,
 				09A990351AC83271001DB137 /* MyUser.m in Sources */,
 				09A9902B1AC80B93001DB137 /* MyOAuthViewController.m in Sources */,
@@ -962,7 +1026,9 @@
 				09A1FECD1ABC450700556B64 /* MyDiscoverViewController.m in Sources */,
 				09A990191AC80924001DB137 /* UIImage+MultiFormat.m in Sources */,
 				09CF22D41ABED386009DDBFA /* MySearchBar.m in Sources */,
+				096696CC1AEE7FE700E53631 /* MyStatusFrame.m in Sources */,
 				097DF6431AE355A60086190F /* MyUserInfoResult.m in Sources */,
+				096696E21AEE888A00E53631 /* MyStatusOriginalView.m in Sources */,
 				09A990131AC80924001DB137 /* SDWebImageDownloader.m in Sources */,
 				09A3AD931ADB5D8A00E8BAE0 /* MyShowPhotoView.m in Sources */,
 				09B751801AC2BB5A00F03084 /* MyNewfeatureViewController.m in Sources */,
@@ -982,14 +1048,17 @@
 				09A990161AC80924001DB137 /* SDWebImagePrefetcher.m in Sources */,
 				09A990061AC80924001DB137 /* AFURLSessionManager.m in Sources */,
 				09A1FEC31ABC426D00556B64 /* MyTabBarController.m in Sources */,
+				096696D31AEE838D00E53631 /* MyStatusRetweetedFrame.m in Sources */,
 				09A9903E1AC835CF001DB137 /* MyControllerTool.m in Sources */,
 				09A9902F1AC82837001DB137 /* MyAccount.m in Sources */,
+				096696D61AEE841200E53631 /* MyStatusDetailFrame.m in Sources */,
 				09A1FE7F1ABC413500556B64 /* main.m in Sources */,
 				09A990031AC80924001DB137 /* AFURLConnectionOperation.m in Sources */,
 				09A990081AC80924001DB137 /* MJFoundation.m in Sources */,
 				09A9900A1AC80924001DB137 /* MJType.m in Sources */,
 				09A9903B1AC834EA001DB137 /* MyPhoto.m in Sources */,
 				09A990181AC80924001DB137 /* UIImage+GIF.m in Sources */,
+				096696D91AEE863900E53631 /* MyStatusCell.m in Sources */,
 				09A9901C1AC80924001DB137 /* UIImageView+WebCache.m in Sources */,
 				09E6B7F31AD408A3001DEF56 /* MyComposeToolBar.m in Sources */,
 				097DF63A1AE354DA0086190F /* MyHomeStatusesParam.m in Sources */,
@@ -999,6 +1068,8 @@
 				09A1FED31ABC58FC00556B64 /* UIImage+Extension.m in Sources */,
 				09A990041AC80924001DB137 /* AFURLRequestSerialization.m in Sources */,
 				09A1FEC71ABC43C500556B64 /* MyHomeViewController.m in Sources */,
+				096696E51AEE89AC00E53631 /* MyStatusRetweetedView.m in Sources */,
+				096696DC1AEE879500E53631 /* MyStatusDetailView.m in Sources */,
 				09A990141AC80924001DB137 /* SDWebImageDownloaderOperation.m in Sources */,
 				09A990381AC832A8001DB137 /* MyStatus.m in Sources */,
 				09A9900B1AC80924001DB137 /* NSObject+MJCoding.m in Sources */,
@@ -1021,6 +1092,7 @@
 				09A9901D1AC80924001DB137 /* UIView+WebCacheOperation.m in Sources */,
 				09A9900E1AC80924001DB137 /* MKAnnotationView+WebCache.m in Sources */,
 				09A990021AC80924001DB137 /* AFSecurityPolicy.m in Sources */,
+				096696CF1AEE81E700E53631 /* MyStatusOriginalFrame.m in Sources */,
 				09B751751AC2A1ED00F03084 /* MyComposeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1137,6 +1209,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Microblog1.1/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1147,6 +1220,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Microblog1.1/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
