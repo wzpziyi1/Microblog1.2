@@ -42,6 +42,8 @@
         textLabel.numberOfLines = 0;
         [self addSubview:textLabel];
         self.textLabel = textLabel;
+        
+        self.userInteractionEnabled = YES;
     }
     return self;
 }

@@ -28,4 +28,7 @@
 
 /** 微博数据 */
 @property (nonatomic, strong) MyStatus *status;
+
+/** 配图相册  */
+@property (nonatomic, assign) CGRect photosFrame;
 @end

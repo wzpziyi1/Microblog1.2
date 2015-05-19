@@ -44,6 +44,8 @@
         
         // 3.cell的设置
         self.backgroundColor = [UIColor clearColor];
+        
+//        self.userInteractionEnabled = NO;
     }
     return self;
 }

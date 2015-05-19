@@ -14,6 +14,8 @@
 #import "MyCellCommonData.h"
 #import "UIImage+Extension.h"
 
+#import "MyStatusPhotosView.h"
+
 @interface MyStatusOriginalView()
 /** 昵称 */
 @property (nonatomic, weak) UILabel *nameLabel;
@@ -28,6 +30,9 @@
 @property (nonatomic, weak) UIImageView *iconView;
 /** 会员图标 */
 @property (nonatomic, weak) UIImageView *vipView;
+
+/** 配图相册 */
+@property (nonatomic, weak) MyStatusPhotosView *photosView;
 @end
 
 @implementation MyStatusOriginalView
@@ -73,6 +78,11 @@
         vipView.contentMode = UIViewContentModeCenter;
         [self addSubview:vipView];
         self.vipView = vipView;
+        
+        // 配图相册
+        MyStatusPhotosView *photosView = [[MyStatusPhotosView alloc] init];
+        [self addSubview:photosView];
+        self.photosView = photosView;
     }
     return self;
 }
@@ -125,6 +135,15 @@
     // 头像
     self.iconView.frame = originalFrame.iconFrame;
     [self.iconView setImageWithURL:[NSURL URLWithString:user.profile_image_url] placeholderImage:[UIImage imageWithName:@"avatar_default_small"]];
+    
+    // 配图相册
+    if (status.pic_urls.count) { // 有配图
+        self.photosView.frame = originalFrame.photosFrame;
+        self.photosView.pic_urls = status.pic_urls;
+        self.photosView.hidden = NO;
+    } else {
+        self.photosView.hidden = YES;
+    }
 }
 
 

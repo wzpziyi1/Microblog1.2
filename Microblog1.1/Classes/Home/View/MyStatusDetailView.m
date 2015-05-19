@@ -34,6 +34,8 @@
         MyStatusRetweetedView *retweetedView = [[MyStatusRetweetedView alloc] init];
         [self addSubview:retweetedView];
         self.retweetedView = retweetedView;
+        
+        self.userInteractionEnabled = YES;
     }
     return self;
 }

@@ -11,4 +11,5 @@
 @interface MyPhoto : NSObject
 /** 缩略图 */
 @property (nonatomic, copy) NSString *thumbnail_pic;
+@property (nonatomic, copy) NSString *bmiddle_pic;
 @end

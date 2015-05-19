@@ -10,6 +10,8 @@
 #import "MyStatus.h"
 #import "MyUser.h"
 #import "MyCellCommonData.h"
+
+#import "MyStatusPhotosView.h"
 @implementation MyStatusOriginalFrame
 
 - (void)setStatus:(MyStatus *)status
@@ -37,18 +39,6 @@
         self.vipFrame = CGRectMake(vipX, vipY, vipW, vipH);
     }
     
-    // 时间
-    CGFloat timeX = nameX;
-    CGFloat timeY = CGRectGetMaxY(self.nameFrame) + MyStatusCellInset * 0.5;
-    CGSize timeSize = [status.created_at sizeWithFont:MyStatusOrginalTimeFont];
-    self.timeFrame = (CGRect){{timeX, timeY}, timeSize};
-    
-    // 来源
-    CGFloat sourceX = CGRectGetMaxX(self.timeFrame) + MyStatusCellInset;
-    CGFloat sourceY = timeY;
-    CGSize sourceSize = [status.source sizeWithFont:MyStatusOrginalSourceFont];
-    self.sourceFrame = (CGRect){{sourceX, sourceY}, sourceSize};
-    
     // 正文
     CGFloat textX = iconX;
     CGFloat textY = CGRectGetMaxY(self.iconFrame) + MyStatusCellInset;
@@ -57,11 +47,23 @@
     CGSize textSize = [status.text sizeWithFont:MyStatusOrginalTextFont constrainedToSize:maxSize];
     self.textFrame = (CGRect){{textX, textY}, textSize};
     
+    // 配图相册
+    CGFloat h = 0;
+    if (status.pic_urls.count) {
+        CGFloat photosX = textX;
+        CGFloat photosY = CGRectGetMaxY(self.textFrame) + MyStatusCellInset;
+        CGSize photosSize = [MyStatusPhotosView sizeWithPhotosCount:status.pic_urls.count];
+        self.photosFrame = (CGRect){{photosX, photosY}, photosSize};
+        
+        h = CGRectGetMaxY(self.photosFrame) + MyStatusCellInset;
+    } else {
+        h = CGRectGetMaxY(self.textFrame) + MyStatusCellInset;
+    }
+    
     // 自己
     CGFloat x = 0;
     CGFloat y = 0;
     CGFloat w = MyScreenW;
-    CGFloat h = CGRectGetMaxY(self.textFrame) + MyStatusCellInset;
     self.frame = CGRectMake(x, y, w, h);
 }
 
