@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface MyStatusToolbar : UIView
-
+@class  MyStatus;
+@interface MyStatusToolbar : UIImageView
+@property (nonatomic, strong) MyStatus *status;
 @end

@@ -105,17 +105,28 @@
     self.textLabel.text = status.text;
     self.textLabel.frame = originalFrame.textFrame;
     
+#warning 需要时刻根据现在的时间字符串来计算时间label的frame
     // 时间
-    self.timeLabel.text = status.created_at;
-    self.timeLabel.frame = originalFrame.timeFrame;
+    NSString *time = status.created_at;
+   // NSLog(@"-------%@----%@",time,status.created_at);
+    self.timeLabel.text = time; // 刚刚 --> 1分钟前 --> 10分钟前
+    CGFloat timeX = CGRectGetMinX(self.nameLabel.frame);
+    CGFloat timeY = CGRectGetMaxY(self.nameLabel.frame) + MyStatusCellInset * 0.5;
+    CGSize timeSize = [time sizeWithFont:MyStatusOrginalTimeFont];
+    self.timeLabel.frame = (CGRect){{timeX, timeY}, timeSize};
     
     // 来源
     self.sourceLabel.text = status.source;
-    self.sourceLabel.frame = originalFrame.sourceFrame;
+    CGFloat sourceX = CGRectGetMaxX(self.timeLabel.frame) + MyStatusCellInset;
+    CGFloat sourceY = timeY;
+    CGSize sourceSize = [status.source sizeWithFont:MyStatusOrginalSourceFont];
+    self.sourceLabel.frame = (CGRect){{sourceX, sourceY}, sourceSize};
     
     // 头像
     self.iconView.frame = originalFrame.iconFrame;
     [self.iconView setImageWithURL:[NSURL URLWithString:user.profile_image_url] placeholderImage:[UIImage imageWithName:@"avatar_default_small"]];
 }
+
+
 
 @end

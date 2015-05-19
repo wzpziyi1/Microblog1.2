@@ -52,10 +52,11 @@
 {
     _statusFrame = statusFrame;
     
-    // 1.微博具体内容的frame数据
+    // 微博具体内容的frame数据
     self.detailView.detailFrame = statusFrame.detailFrame;
     
-    // 2.底部工具条的frame数据
+    // 底部工具条的frame数据
     self.toolbar.frame = statusFrame.toolbarFrame;
+    self.toolbar.status = statusFrame.status;
 }
 @end

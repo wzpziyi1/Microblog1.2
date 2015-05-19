@@ -19,6 +19,7 @@
 		096E513C1AE401B2002F5A66 /* MyBaseParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 096E513B1AE401B2002F5A66 /* MyBaseParam.m */; };
 		096E513F1AE40284002F5A66 /* MyUnreadCountParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 096E513E1AE40284002F5A66 /* MyUnreadCountParam.m */; };
 		096E51451AE4031B002F5A66 /* MyUnreadCountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 096E51441AE4031B002F5A66 /* MyUnreadCountResult.m */; };
+		0976F1171B09F482007FA7D7 /* NSDate+NSDate_Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 0976F1161B09F482007FA7D7 /* NSDate+NSDate_Extension.m */; };
 		097DF62F1AE34E2A0086190F /* MyBaseTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 097DF62E1AE34E2A0086190F /* MyBaseTool.m */; };
 		097DF6321AE352B70086190F /* MyUserTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 097DF6311AE352B70086190F /* MyUserTool.m */; };
 		097DF63A1AE354DA0086190F /* MyHomeStatusesParam.m in Sources */ = {isa = PBXBuildFile; fileRef = 097DF6391AE354DA0086190F /* MyHomeStatusesParam.m */; };
@@ -135,6 +136,8 @@
 		096E513E1AE40284002F5A66 /* MyUnreadCountParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyUnreadCountParam.m; sourceTree = "<group>"; };
 		096E51431AE4031B002F5A66 /* MyUnreadCountResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUnreadCountResult.h; sourceTree = "<group>"; };
 		096E51441AE4031B002F5A66 /* MyUnreadCountResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyUnreadCountResult.m; sourceTree = "<group>"; };
+		0976F1151B09F482007FA7D7 /* NSDate+NSDate_Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+NSDate_Extension.h"; sourceTree = "<group>"; };
+		0976F1161B09F482007FA7D7 /* NSDate+NSDate_Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+NSDate_Extension.m"; sourceTree = "<group>"; };
 		097DF62D1AE34E2A0086190F /* MyBaseTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBaseTool.h; sourceTree = "<group>"; };
 		097DF62E1AE34E2A0086190F /* MyBaseTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBaseTool.m; sourceTree = "<group>"; };
 		097DF6301AE352B70086190F /* MyUserTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUserTool.h; sourceTree = "<group>"; };
@@ -575,6 +578,8 @@
 				09A1FED21ABC58FC00556B64 /* UIImage+Extension.m */,
 				09DCA4F01ABD5D620075C5A5 /* UINavigationItem+Extension.h */,
 				09DCA4F11ABD5D620075C5A5 /* UINavigationItem+Extension.m */,
+				0976F1151B09F482007FA7D7 /* NSDate+NSDate_Extension.h */,
+				0976F1161B09F482007FA7D7 /* NSDate+NSDate_Extension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1010,6 +1015,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09A98FFE1AC80924001DB137 /* AFHTTPRequestOperation.m in Sources */,
+				0976F1171B09F482007FA7D7 /* NSDate+NSDate_Extension.m in Sources */,
 				097DF64C1AE357350086190F /* MyAccessTokenParam.m in Sources */,
 				09A1FEC21ABC426D00556B64 /* MyNavigationController.m in Sources */,
 				09A1FED01ABC452100556B64 /* MyProfileViewController.m in Sources */,

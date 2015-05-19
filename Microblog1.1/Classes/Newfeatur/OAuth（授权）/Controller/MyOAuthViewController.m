@@ -94,7 +94,7 @@
 {
 //    //请求管理者
 //    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-//    //mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", nil];  //需要设置这个变量接受text/plain的文件格式，但又不能直接覆盖它，所以去它所在的文件加上就好   加上的话，在acceptableContentTupes 、AFURLResponseSerialization里面
+//    mgr.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", nil];  //需要设置这个变量接受text/plain的文件格式，但又不能直接覆盖它，所以去它所在的文件加上就好   加上的话，在acceptableContentTupes 、AFURLResponseSerialization里面
 //    //请求参数
 //    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
 //    

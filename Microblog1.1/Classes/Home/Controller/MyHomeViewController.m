@@ -82,6 +82,9 @@
     [super viewDidLoad];
 //    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:ID];
     
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.8]];
+    
     //设置导航栏
     [self setNavigationBar];
     
@@ -257,6 +260,10 @@
  */
 - (void)showNewStatusCount:(int)count
 {
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber -= self.tabBarItem.badgeValue.intValue;
+    self.tabBarItem.badgeValue = nil;
+    
     UILabel *showStatus = [[UILabel alloc] init];
     
     if (count) {
