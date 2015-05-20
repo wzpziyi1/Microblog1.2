@@ -19,11 +19,18 @@ typedef enum{
 
 @protocol MyComposeToolBarDelegate <NSObject>
 @optional
+
 - (void)didClickButton:(UIButton *)button;
+
 
 @end
 
 
 @interface MyComposeToolBar : UIView
 @property (nonatomic, weak) id <MyComposeToolBarDelegate> delegate;
+
+/**
+ *  判断是否显示表情图片
+ */
+@property (nonatomic, assign, getter=isShowEmotionButton) BOOL showEmotionButton;
 @end

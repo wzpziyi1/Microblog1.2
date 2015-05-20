@@ -22,18 +22,39 @@
 
 #import "MySendStatusParam.h"
 #import "MyStatusTool.h"
+
+#import "MyEmotionKeyboard.h"
+
 @interface MyComposeViewController () <UITextViewDelegate, MyComposeToolBarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, weak) MyTextView *textView;
 @property (nonatomic, weak) MyComposeToolBar *toolBar;
 @property (nonatomic, weak) MyShowPhotoView *photoView;
+
+/** 记录键盘是否正在改变 */
+@property (nonatomic, assign) BOOL changeKeyboard;
+
+
+/**  这里使用懒加载，因为这个view并不需要频繁创建，多次重复加载，只需要创建一次即可，为了性能，使用懒加载最好  */
+@property (nonatomic, strong) MyEmotionKeyboard *keyboard;
 @end
 
 @implementation MyComposeViewController
 
+- (MyEmotionKeyboard *)keyboard
+{
+    if (_keyboard == nil) {
+        _keyboard = [[MyEmotionKeyboard alloc] initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 253, [UIScreen mainScreen].bounds.size.width, 253)];
+    }
+    return _keyboard;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.changeKeyboard = NO;
+    
     [self setupNavigationbar];
     
     [self setupTextView];
@@ -105,6 +126,11 @@
 
 - (void)keyboardWillHidden:(NSNotification *)notification
 {
+    if (self.changeKeyboard) {
+        self.changeKeyboard = NO;
+        return;
+    }
+    
     CGFloat duration = [notification.userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
 //    CGRect frame = [notification.userInfo[@"UIKeyboardBoundsUserInfoKey"] CGRectValue];
 //    
@@ -150,9 +176,19 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.textView.inputView = nil;
+    [super viewDidAppear:animated];
     [self.textView becomeFirstResponder];
     
 }
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.textView endEditing:YES];
+}
+
+
 /**
  *  开始拖拽scrollView时调用
  *
@@ -325,6 +361,23 @@
  */
 - (void)openEmotion
 {
+    self.changeKeyboard = YES;
+    if (self.textView.inputView == nil) {
+        self.textView.inputView = nil;
+        self.textView.inputView = self.keyboard;
+        self.toolBar.showEmotionButton = NO;
+    }else
+    {
+        self.textView.inputView = nil;
+        self.toolBar.showEmotionButton = YES;
+    }
+    
+    
+    [self.textView resignFirstResponder];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.textView  becomeFirstResponder];
+    });
     
 }
 

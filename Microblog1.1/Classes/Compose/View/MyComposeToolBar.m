@@ -7,6 +7,12 @@
 //
 
 #import "MyComposeToolBar.h"
+#import "UIImage+Extension.h"
+
+
+@interface MyComposeToolBar ()
+@property (nonatomic, weak) UIButton *emotionButton;
+@end
 
 @implementation MyComposeToolBar
 
@@ -24,13 +30,14 @@
         
         [self addButtonWithIcon:@"compose_mentionbutton_background" highIcon:@"compose_mentionbutton_background_highlighted" tag:MyComposeToolBarButtonMention];
         
-        [self addButtonWithIcon:@"compose_emoticonbutton_background" highIcon:@"compose_emoticonbutton_background_highlighted" tag:MyComposeToolBarButtonEmotion];
+        
+        self.emotionButton = [self addButtonWithIcon:@"compose_emoticonbutton_background" highIcon:@"compose_emoticonbutton_background_highlighted" tag:MyComposeToolBarButtonEmotion];
         
     }
     return self;
 }
 
-- (void)addButtonWithIcon:(NSString *)icon highIcon:(NSString *)highIcon tag:(MyComposeToolBarButtonType)buttonType
+- (UIButton *)addButtonWithIcon:(NSString *)icon highIcon:(NSString *)highIcon tag:(MyComposeToolBarButtonType)buttonType
 {
     UIButton *bnt = [[UIButton alloc] init];
     bnt.tag = buttonType;
@@ -40,6 +47,8 @@
     [bnt addTarget:self action:@selector(buttonDidClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:bnt];
+    
+    return bnt;
 }
 
 - (void)buttonDidClick:(UIButton *)bnt
@@ -64,4 +73,16 @@
     }
 }
 
+- (void)setShowEmotionButton:(BOOL)showEmotionButton
+{
+    _showEmotionButton = showEmotionButton;
+    
+    if (_showEmotionButton) { // 显示表情按钮
+        [self.emotionButton setImage:[UIImage imageWithName:@"compose_emoticonbutton_background"] forState:UIControlStateNormal];
+        [self.emotionButton setImage:[UIImage imageWithName:@"compose_emoticonbutton_background_highlighted"] forState:UIControlStateHighlighted];
+    } else { // 切换为键盘按钮
+        [self.emotionButton setImage:[UIImage imageWithName:@"compose_keyboardbutton_background"] forState:UIControlStateNormal];
+        [self.emotionButton setImage:[UIImage imageWithName:@"compose_keyboardbutton_background_highlighted"] forState:UIControlStateHighlighted];
+    }
+}
 @end

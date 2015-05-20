@@ -249,7 +249,7 @@
         
         [self showNewStatusCount:(int)newFrames.count];
     } failure:^(NSError *error) {
-        NSLog(@"请求失败--%@", error);
+        NSLog(@"------请求失败--%@", error);
         [refresh endRefreshing];
     }];
 }

@@ -33,7 +33,9 @@
 + (void)post:(NSString *)urlStr params:(id)params success:(void (^)(id json))success failure:(void (^) (NSError *error))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
+//        manager.responseSerializer.acceptableContentTypes
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager POST:urlStr parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success) {
             success(responseObject);
@@ -49,7 +51,9 @@
 + (void)post:(NSString *)urlStr params:(id)params data:(NSData *)data name:(NSString *)name fileName:(NSString *)fileName mimeType:(NSString *)mimeType success:(void (^)(id json))success failure:(void (^)(NSError *error))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
+    //        manager.responseSerializer.acceptableContentTypes
+//    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager POST:urlStr parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:data name:name fileName:fileName mimeType:mimeType];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {

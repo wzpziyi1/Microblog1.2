@@ -10,18 +10,14 @@
 
 @implementation MyAccount
 
-+ (id)accountWithDict:(NSDictionary *)dict
+
+- (void)setExpires_in:(NSString *)expires_in
 {
-    MyAccount *account = [[MyAccount  alloc] init];
-    account.expires_in = dict[@"expires_in"];
-    account.access_token = dict[@"access_token"];
-    account.uid = dict[@"uid"];
-    account.name = dict[@"name"];
-    //获取现在时间
+    _expires_in =  [expires_in copy];
+    
+    // 确定帐号的过期时间 ： 帐号创建时间 + 有效期
     NSDate *now = [NSDate date];
-    //计算账号过期时间
-    account.expires_time = [now dateByAddingTimeInterval:account.expires_in.doubleValue];
-    return account;
+    self.expires_time = [now dateByAddingTimeInterval:expires_in.doubleValue];
 }
 
 - (id)initWithCoder:(NSCoder *)decode
