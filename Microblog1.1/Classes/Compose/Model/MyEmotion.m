@@ -7,12 +7,18 @@
 //
 
 #import "MyEmotion.h"
-
+#import "NSString+Emoji.h"
 @implementation MyEmotion
 
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"%@ - %@ - %@", self.chs, self.png, self.code];
-}
 
+- (void)setCode:(NSString *)code
+{
+    _code = [code copy];
+    
+    if (code == nil) {
+        return;
+    }
+    
+    self.emoji = [NSString emojiWithStringCode:code];
+}
 @end

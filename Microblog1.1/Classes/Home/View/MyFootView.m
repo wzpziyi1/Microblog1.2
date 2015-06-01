@@ -20,6 +20,7 @@
     if (self = [super initWithFrame:frame]) {
         
         self = [[[NSBundle mainBundle] loadNibNamed:@"MyFootView" owner:nil options:nil] lastObject];
+        
     }
     return self;
 }

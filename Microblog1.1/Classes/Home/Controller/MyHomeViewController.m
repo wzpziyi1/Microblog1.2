@@ -97,6 +97,7 @@
     
     //添加footView,控制上拉刷新,设置代理，监听scrollView的滚动，当footView滚动到一定位置时，开始刷新
     MyFootView *footView = [MyFootView footView];
+    [footView setBackgroundColor:[UIColor clearColor]];
     self.tableView.tableFooterView = footView;
     self.footView = footView;
     

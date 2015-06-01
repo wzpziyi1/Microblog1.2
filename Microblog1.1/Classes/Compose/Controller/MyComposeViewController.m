@@ -177,7 +177,6 @@
 {
     [super viewDidAppear:animated];
     self.textView.inputView = nil;
-    [super viewDidAppear:animated];
     [self.textView becomeFirstResponder];
     
 }
@@ -374,7 +373,7 @@
     
     
     [self.textView resignFirstResponder];
-    
+    self.changeKeyboard = NO;  //由于_changeKeyboard是用来记录，键盘是否在进行表情键盘和默认键盘之间切换，如果是的话，那么工具条不应该跟随键盘退下去，当键盘退下（隐藏的时候）会调用（通知监听，方法）keyboardWillHidden，那么，当知道这个值为YES的时候，应当不进行工具条退下操作，同时，当（表情或者默认）键盘退下完成时，应当立刻把keyboardWillHidden设置为NO,一边进行拖拽scrollView的时候，可以同时将键盘与工具条一起退下隐藏
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.textView  becomeFirstResponder];
     });

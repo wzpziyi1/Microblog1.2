@@ -55,15 +55,41 @@
     
     self.pageControl.numberOfPages = (emotions.count - 1) / MyEmotionMaxCountPerPage + 1;
     
+    /*
+     这里是需要性能优化的：
+     在开发中，我们并不能频繁的创建和销毁对象，因为这会造成极大的性能问题。
+     所以，对于这样，感觉需要频繁创建、销毁的对象的处理，我们可以遵守下面这几个原则：
+     1、用到时，发现不够就创建，如果够，那么就修改以前对象里面的数据即可
+     2、发现对象多了，那么就隐藏即可
+     这样处理，就ok了
     //先从scrollView里面移除所有以前添加了的页码
     [self.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-    for (int i = 0; i<self.pageControl.numberOfPages; i++) {
-        UIView *gridView = [[UIView alloc] init];
-        gridView.backgroundColor = MyRandomColor;
-        [self.scrollView addSubview:gridView];
+    */
+    int pageCount = self.pageControl.numberOfPages;
+    for (int i = 0; i< pageCount; i++) {
+        MyEmotionGirdView *girdView;
+        if (self.scrollView.subviews.count > i) {  //足够，取出来用就好
+            girdView = self.scrollView.subviews[i];
+        }else
+        {                                           //不够，创建新的
+            girdView = [[MyEmotionGirdView alloc] init];
+            [self.scrollView addSubview:girdView];
+        }
+        int loc = i * MyEmotionMaxCountPerPage;
+        int len = MyEmotionMaxCountPerPage;
+        if (loc + len > self.emotions.count) {  //判断是否越界
+            len = self.emotions.count - loc;
+        }
+        NSRange range = NSMakeRange(loc, len);
+        girdView.emotions = [self.emotions subarrayWithRange:range];
+        girdView.hidden = NO;
     }
-//    self.scrollView.contentOffset = CGPointMake(0, 0);
+    
+    for (int i = pageCount; i < self.scrollView.subviews.count; i++) {  //多了，那么进行隐藏
+        [self.scrollView.subviews[i] setHidden:YES];
+    }
+    
+    self.scrollView.contentOffset = CGPointMake(0, 0);
     [self setNeedsLayout];
 }
 

@@ -107,6 +107,7 @@
 		09B7516E1AC28B8400F03084 /* MyTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B7516D1AC28B8400F03084 /* MyTabBar.m */; };
 		09B751751AC2A1ED00F03084 /* MyComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B751741AC2A1ED00F03084 /* MyComposeViewController.m */; };
 		09B751801AC2BB5A00F03084 /* MyNewfeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B7517F1AC2BB5A00F03084 /* MyNewfeatureViewController.m */; };
+		09C8C9AF1B0E052100E355D1 /* NSString+Emoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C8C9AE1B0E052100E355D1 /* NSString+Emoji.m */; };
 		09CB93881AD186DB00D449F2 /* MyTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CB93871AD186DB00D449F2 /* MyTextView.m */; };
 		09CB938B1AD19AA900D449F2 /* MyFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CB938A1AD19AA900D449F2 /* MyFootView.m */; };
 		09CB938D1AD19AC600D449F2 /* MyFootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09CB938C1AD19AC600D449F2 /* MyFootView.xib */; };
@@ -329,6 +330,8 @@
 		09B751741AC2A1ED00F03084 /* MyComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComposeViewController.m; sourceTree = "<group>"; };
 		09B7517E1AC2BB5A00F03084 /* MyNewfeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNewfeatureViewController.h; sourceTree = "<group>"; };
 		09B7517F1AC2BB5A00F03084 /* MyNewfeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNewfeatureViewController.m; sourceTree = "<group>"; };
+		09C8C9AD1B0E052100E355D1 /* NSString+Emoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Emoji.h"; sourceTree = "<group>"; };
+		09C8C9AE1B0E052100E355D1 /* NSString+Emoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Emoji.m"; sourceTree = "<group>"; };
 		09CB93861AD186DB00D449F2 /* MyTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTextView.h; sourceTree = "<group>"; };
 		09CB93871AD186DB00D449F2 /* MyTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTextView.m; sourceTree = "<group>"; };
 		09CB93891AD19AA900D449F2 /* MyFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFootView.h; sourceTree = "<group>"; };
@@ -634,6 +637,8 @@
 				09DCA4F11ABD5D620075C5A5 /* UINavigationItem+Extension.m */,
 				0976F1151B09F482007FA7D7 /* NSDate+NSDate_Extension.h */,
 				0976F1161B09F482007FA7D7 /* NSDate+NSDate_Extension.m */,
+				09C8C9AD1B0E052100E355D1 /* NSString+Emoji.h */,
+				09C8C9AE1B0E052100E355D1 /* NSString+Emoji.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1191,6 +1196,7 @@
 				09A9900B1AC80924001DB137 /* NSObject+MJCoding.m in Sources */,
 				097DF63D1AE3550D0086190F /* MyHomeStatusesResult.m in Sources */,
 				09467E961B0CDF2A00815AC1 /* MyEmotionGirdView.m in Sources */,
+				09C8C9AF1B0E052100E355D1 /* NSString+Emoji.m in Sources */,
 				09A1FE851ABC413500556B64 /* Microblog1_1.xcdatamodeld in Sources */,
 				09A990111AC80924001DB137 /* SDWebImageCompat.m in Sources */,
 				09A734661B0B2E9E0072E652 /* MyStatusPhotosView.m in Sources */,

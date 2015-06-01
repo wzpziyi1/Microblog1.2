@@ -22,14 +22,10 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // 1.添加4个按钮
         [self setupButton:@"最近" tag:MyEmotionTypeRecent];
         UIButton *defaultButton = [self setupButton:@"默认" tag:MyEmotionTypeDefault];
         [self setupButton:@"Emoji" tag:MyEmotionTypeEmoji];
         [self setupButton:@"浪小花" tag:MyEmotionTypeLxh];
-        
-        // 2.默认选中“默认”按钮
-        [self buttonClick:defaultButton];
     }
     return self;
 }
@@ -89,12 +85,15 @@
  */
 - (void)buttonClick:(UIButton *)button
 {
-    // 1.控制按钮状态
+    if (button == self.selectedButton) {
+        return;
+    }
+    // 控制按钮状态
     self.selectedButton.selected = NO;
     button.selected = YES;
     self.selectedButton = button;
     
-    // 2.通知代理
+
     if ([self.delegate respondsToSelector:@selector(emotionToolbar:didSelectedButton:)]) {
         [self.delegate emotionToolbar:self didSelectedButton:button.tag];
     }

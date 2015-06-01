@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyEmotionView : UIImageView
+@class MyEmotion;
 
+@interface MyEmotionView : UIButton
+@property (nonatomic, strong) MyEmotion *emotion;
 @end

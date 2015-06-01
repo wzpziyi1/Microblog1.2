@@ -29,6 +29,8 @@
     if (_defaultEmotions == nil) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"EmotionIcons/default/info.plist" ofType:nil];
         _defaultEmotions = [MyEmotion objectArrayWithFile:path];
+        
+        [_defaultEmotions makeObjectsPerformSelector:@selector(setDirectory:) withObject:@"EmotionIcons/default"];
 //        NSLog(@"%@",_defaultEmotions);
     }
     return _defaultEmotions;
@@ -39,6 +41,8 @@
     if (_emojiEmotions == nil) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"EmotionIcons/emoji/info.plist" ofType:nil];
         _emojiEmotions = [MyEmotion objectArrayWithFile:path];
+        
+        [_emojiEmotions makeObjectsPerformSelector:@selector(setDirectory:) withObject:@"EmotionIcons/emoji"];
     }
     return _emojiEmotions;
 }
@@ -48,6 +52,8 @@
     if (_lxhEmotions == nil) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"EmotionIcons/lxh/info.plist" ofType:nil];
         _lxhEmotions = [MyEmotion objectArrayWithFile:path];
+        
+        [_lxhEmotions makeObjectsPerformSelector:@selector(setDirectory:) withObject:@"EmotionIcons/lxh"];
     }
     return _lxhEmotions;
 }
