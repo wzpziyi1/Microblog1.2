@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MyEmotion : UIView
+@interface MyEmotion : UIView <NSCoding>
 /** 表情的文字描述 */
 @property (nonatomic, copy) NSString *chs;
 /** 表情的文png图片名 */

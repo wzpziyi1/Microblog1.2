@@ -10,7 +10,7 @@
 #import "UINavigationItem+Extension.h"
 #import "MyNavigationController.h"
 
-#import "MyTextView.h"
+#import "MyEmotionTextView.h"
 #import "MyComposeToolBar.h"
 #import "MyShowPhotoView.h"
 
@@ -24,10 +24,13 @@
 #import "MyStatusTool.h"
 
 #import "MyEmotionKeyboard.h"
+#import "MyEmotionNotification.h"
+
+#import "MyEmotion.h"
 
 @interface MyComposeViewController () <UITextViewDelegate, MyComposeToolBarDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (nonatomic, weak) MyTextView *textView;
+@property (nonatomic, weak) MyEmotionTextView *textView;
 @property (nonatomic, weak) MyComposeToolBar *toolBar;
 @property (nonatomic, weak) MyShowPhotoView *photoView;
 
@@ -64,6 +67,11 @@
     
     //添加相册
     [self addPhotoView];
+    
+    // 监听表情选中的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emotionDidClick:) name:MyEmotionDidSelectedNotification object:nil];
+    // 监听删除按钮点击的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(emotionDidDeleted:) name:MyEmotionDidDeletedNotification object:nil];
 }
 
 /**
@@ -146,7 +154,7 @@
  */
 - (void)setupTextView
 {
-    MyTextView *textView = [[MyTextView alloc] initWithFrame:self.view.frame];
+    MyEmotionTextView *textView = [[MyEmotionTextView alloc] initWithFrame:self.view.frame];
     [self.view addSubview:textView];
     self.textView = textView;
     self.textView.delegate = self;
@@ -175,9 +183,10 @@
  */
 - (void)viewDidAppear:(BOOL)animated
 {
+    
     [super viewDidAppear:animated];
-    self.textView.inputView = nil;
     [self.textView becomeFirstResponder];
+    
     
 }
 
@@ -200,7 +209,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    self.navigationItem.rightBarButtonItem.enabled = textView.text.length;
+    self.navigationItem.rightBarButtonItem.enabled = textView.attributedText.length;
 }
 
 /**
@@ -362,7 +371,6 @@
 {
     self.changeKeyboard = YES;
     if (self.textView.inputView == nil) {
-        self.textView.inputView = nil;
         self.textView.inputView = self.keyboard;
         self.toolBar.showEmotionButton = NO;
     }else
@@ -397,4 +405,25 @@
 }
 
 
+#pragma mark -- MyEmotionNotifacation
+/**
+ *  当表情选中的时候调用
+ *
+ *  @param note 里面包含了选中的表情
+ */
+- (void)emotionDidClick:(NSNotification *)note
+{
+    MyEmotion *emotion = note.userInfo[MySelectedEmotion];
+    [self.textView appendEmotion:emotion];
+    
+    [self textViewDidChange:self.textView];
+}
+
+/**
+ *  当点击表情键盘上的删除按钮时调用
+ */
+- (void)emotionDidDeleted:(NSNotification *)note
+{
+    [self.textView deleteBackward];
+}
 @end

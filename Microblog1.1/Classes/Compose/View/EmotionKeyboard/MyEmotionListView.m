@@ -53,7 +53,16 @@
 {
     _emotions = emotions;
     
-    self.pageControl.numberOfPages = (emotions.count - 1) / MyEmotionMaxCountPerPage + 1;
+//    NSLog(@"----:%@",@((emotions.count - 1) / MyEmotionMaxCountPerPage + 1));
+    
+    if (emotions.count == 0) {
+        self.pageControl.numberOfPages = 1;
+    }else
+    {
+        self.pageControl.numberOfPages = (emotions.count - 1) / MyEmotionMaxCountPerPage + 1;
+    }
+    
+//    NSLog(@"111111111");
     
     /*
      这里是需要性能优化的：
