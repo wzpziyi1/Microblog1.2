@@ -44,7 +44,8 @@
     CGFloat textY = CGRectGetMaxY(self.iconFrame) + MyStatusCellInset;
     CGFloat maxW = MyScreenW - 2 * textX;
     CGSize maxSize = CGSizeMake(maxW, MAXFLOAT);
-    CGSize textSize = [status.text sizeWithFont:MyStatusOrginalTextFont constrainedToSize:maxSize];
+    //计算富文本的尺寸
+    CGSize textSize = [status.attribute boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     self.textFrame = (CGRect){{textX, textY}, textSize};
     
     // 配图相册

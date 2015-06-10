@@ -166,7 +166,7 @@
     }];
     
     // 设置字体
-    [attributedText addAttribute:NSFontAttributeName value:MyStatusRichTextFont range:NSMakeRange(0, attributedText.length)];
+    [attributedText addAttribute:NSFontAttributeName value:MyStatusOrginalTextFont range:NSMakeRange(0, attributedText.length)];
     
     self.attribute = attributedText;
 }

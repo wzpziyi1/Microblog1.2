@@ -28,8 +28,9 @@
     CGFloat textY = CGRectGetMaxY(self.nameFrame) + MyStatusCellInset * 0.5;
     CGFloat maxW = MyScreenW - 2 * textX;
     CGSize maxSize = CGSizeMake(maxW, MAXFLOAT);
-    CGSize textSize = [retweetedStatus.text sizeWithFont:MyStatusRetweetedTextFont constrainedToSize:maxSize];
+    CGSize textSize = [retweetedStatus.attribute boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     self.textFrame = (CGRect){{textX, textY}, textSize};
+//    NSLog(@"---  %@",retweetedStatus.attribute);
     
     // 自己
     CGFloat x = 0;

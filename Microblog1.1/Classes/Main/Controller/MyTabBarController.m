@@ -80,7 +80,7 @@
         }
         
         // 在图标上显示所有的未读数
-        [UIApplication sharedApplication].applicationIconBadgeNumber = result.totalCount;
+//        [UIApplication sharedApplication].applicationIconBadgeNumber = result.totalCount;
     } failure:^(NSError *error) {
         NSLog(@"获得未读数失败---%@", error);
     }];

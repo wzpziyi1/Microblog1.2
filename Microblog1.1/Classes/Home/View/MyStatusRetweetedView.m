@@ -64,7 +64,7 @@
     self.nameLabel.frame = retweetedFrame.nameFrame;
     
     // 2.正文（内容）
-    self.textLabel.text = retweetedStatus.text;
+    self.textLabel.attributedText = retweetedStatus.attribute;
     self.textLabel.frame = retweetedFrame.textFrame;
 }
 
