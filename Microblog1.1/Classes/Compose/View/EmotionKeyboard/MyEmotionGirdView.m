@@ -80,6 +80,10 @@
     // 检测触摸点落在哪个表情上
     MyEmotionView *emotionView = [self emotionViewWithPoint:point];
     
+    if (emotionView.hidden == YES) {
+        return;
+    }
+    
     if (recognizer.state == UIGestureRecognizerStateEnded) { // 手松开了
         // 移除表情弹出控件
         [self.popView dismiss];

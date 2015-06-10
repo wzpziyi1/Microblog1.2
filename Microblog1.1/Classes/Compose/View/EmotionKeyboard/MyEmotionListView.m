@@ -41,6 +41,9 @@
         
         //图片样式不符合，无需自定义，直接kvc换掉
         UIPageControl *pageControl = [[UIPageControl alloc] init];
+        //单页时，隐藏
+        pageControl.hidesForSinglePage = YES;
+        pageControl.defersCurrentPageDisplay = YES;
         [pageControl setValue:[UIImage imageWithName:@"compose_keyboard_dot_normal"]  forKeyPath:@"_pageImage"];
         [pageControl setValue:[UIImage imageWithName:@"compose_keyboard_dot_selected"] forKeyPath:@"_currentPageImage"];
         [self addSubview:pageControl];
