@@ -56,6 +56,13 @@
     [self textDidChange];  //当TextView文字用代码改变时，需要调用，因为通知、代理只能监听键盘、鼠标的事件
 }
 
+- (void )setAttributedText:(NSAttributedString *)attributedText
+{
+    [super setAttributedText:attributedText];
+    
+    [self textDidChange];
+}
+
 - (void)setFont:(UIFont *)font
 {
     [super setFont:font];
@@ -101,7 +108,7 @@
  */
 - (void)textDidChange
 {
-    self.placeLabel.hidden = self.text.length;
+    self.placeLabel.hidden = self.hasText;
 }
 
 - (void)dealloc

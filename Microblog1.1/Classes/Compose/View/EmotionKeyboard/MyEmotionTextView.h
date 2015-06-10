@@ -15,4 +15,11 @@
  *  拼接表情到最后面
  */
 - (void)appendEmotion:(MyEmotion *)emotion;
+
+
+/**
+ *  text里面的具体内容（需要把图片（用正则表达式）转化为文本，然后，在发出成果显示的时候，再转化回图片）
+ *
+ */
+- (NSString *)realText;
 @end

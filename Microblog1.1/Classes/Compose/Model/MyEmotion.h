@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface MyEmotion : UIView <NSCoding>
-/** 表情的文字描述 */
+/** 表情的文字描述(简体中文) */
 @property (nonatomic, copy) NSString *chs;
+
+/** 表情的文字描述 (繁体中文)*/
+@property (nonatomic, copy) NSString *cht;
 /** 表情的文png图片名 */
 @property (nonatomic, copy) NSString *png;
 /** 表情的存放文件夹\目录 */

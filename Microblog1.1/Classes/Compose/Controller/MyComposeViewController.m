@@ -217,7 +217,25 @@
  */
 - (void)setupNavigationbar
 {
-    self.navigationItem.title = @"发微博";
+    NSString *name = [[MyAccountTool account] name];
+    if (name) {
+        NSString *prefix = @"发微博";
+        NSString *text = [NSString stringWithFormat:@"%@\n%@",prefix,name];
+        NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:text];
+        [string addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:15] range:[text rangeOfString:prefix]];
+        [string addAttribute:NSFontAttributeName value:[UIFont boldSystemFontOfSize:13] range:[text rangeOfString:name]];
+        
+        UILabel *label = [[UILabel alloc] init];
+        label.attributedText = string;
+        label.numberOfLines = 0;
+        label.textAlignment = NSTextAlignmentCenter;
+        label.frame = CGRectMake(0, 0, 100, 44);
+        self.navigationItem.titleView = label;
+    }else
+    {
+        self.navigationItem.title = @"发微博";
+    }
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(cancel)];
     
     UIButton *bnt = [[UIButton alloc] init];
@@ -291,7 +309,7 @@
     // 1.封装请求参数
     MySendStatusParam *param = [[MySendStatusParam alloc] init];
     param.access_token = [[MyAccountTool account] access_token];
-    param.status = self.textView.text;
+    param.status = self.textView.realText;
     
     // 2.发微博
     [MyStatusTool sendStatusWithParam:param success:^(MySendStatusResult *result) {
@@ -425,5 +443,7 @@
 - (void)emotionDidDeleted:(NSNotification *)note
 {
     [self.textView deleteBackward];
+    
+    [self textViewDidChange:self.textView];
 }
 @end

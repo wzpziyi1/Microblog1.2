@@ -29,6 +29,6 @@
 #define MyStatusRetweetedTextFont MyStatusOrginalTextFont
 
 #define MyScreenW [UIScreen mainScreen].bounds.size.width
-@interface MyCellCommonData : UIView
 
-@end
+// 富文本字体
+#define MyStatusRichTextFont [UIFont systemFontOfSize:13]

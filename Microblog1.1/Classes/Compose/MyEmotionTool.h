@@ -32,4 +32,9 @@
  *  保存最近使用的表情
  */
 + (void)addRecentEmotion:(MyEmotion *)emotion;
+
+/**
+ *  查找表情
+ */
++ (MyEmotion *)emotionWithDesc:(NSString *)desc;
 @end

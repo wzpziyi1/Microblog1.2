@@ -110,6 +110,8 @@
 		09AB97B31B228EE40058A023 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 09AB97B21B228EE40058A023 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		09AB97B51B228FD20058A023 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 09AB97B41B228FD20058A023 /* libicucore.dylib */; };
 		09AB97B81B22939A0058A023 /* MyEmotionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09AB97B71B22939A0058A023 /* MyEmotionTextView.m */; };
+		09B0241C1B242C6100F91A11 /* MyEmotionAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B0241B1B242C6100F91A11 /* MyEmotionAttachment.m */; };
+		09B0241F1B243AF400F91A11 /* MyRegexResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B0241E1B243AF400F91A11 /* MyRegexResult.m */; };
 		09B7516E1AC28B8400F03084 /* MyTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B7516D1AC28B8400F03084 /* MyTabBar.m */; };
 		09B751751AC2A1ED00F03084 /* MyComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B751741AC2A1ED00F03084 /* MyComposeViewController.m */; };
 		09B751801AC2BB5A00F03084 /* MyNewfeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 09B7517F1AC2BB5A00F03084 /* MyNewfeatureViewController.m */; };
@@ -341,6 +343,10 @@
 		09AB97B41B228FD20058A023 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		09AB97B61B22939A0058A023 /* MyEmotionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEmotionTextView.h; sourceTree = "<group>"; };
 		09AB97B71B22939A0058A023 /* MyEmotionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEmotionTextView.m; sourceTree = "<group>"; };
+		09B0241A1B242C6100F91A11 /* MyEmotionAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEmotionAttachment.h; sourceTree = "<group>"; };
+		09B0241B1B242C6100F91A11 /* MyEmotionAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEmotionAttachment.m; sourceTree = "<group>"; };
+		09B0241D1B243AF400F91A11 /* MyRegexResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRegexResult.h; sourceTree = "<group>"; };
+		09B0241E1B243AF400F91A11 /* MyRegexResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRegexResult.m; sourceTree = "<group>"; };
 		09B7516C1AC28B8400F03084 /* MyTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTabBar.h; sourceTree = "<group>"; };
 		09B7516D1AC28B8400F03084 /* MyTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTabBar.m; sourceTree = "<group>"; };
 		09B751731AC2A1ED00F03084 /* MyComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComposeViewController.h; sourceTree = "<group>"; };
@@ -638,6 +644,8 @@
 				09CB93891AD19AA900D449F2 /* MyFootView.h */,
 				09CB938A1AD19AA900D449F2 /* MyFootView.m */,
 				09CB938C1AD19AC600D449F2 /* MyFootView.xib */,
+				09B0241D1B243AF400F91A11 /* MyRegexResult.h */,
+				09B0241E1B243AF400F91A11 /* MyRegexResult.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1009,6 +1017,8 @@
 			children = (
 				097A35AC1B0C8F9C00244196 /* MyEmotion.h */,
 				097A35AD1B0C8F9C00244196 /* MyEmotion.m */,
+				09B0241A1B242C6100F91A11 /* MyEmotionAttachment.h */,
+				09B0241B1B242C6100F91A11 /* MyEmotionAttachment.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1178,6 +1188,7 @@
 				09A9902B1AC80B93001DB137 /* MyOAuthViewController.m in Sources */,
 				097DF62F1AE34E2A0086190F /* MyBaseTool.m in Sources */,
 				09CE68F91ABE723700F9886B /* MyTitleButton.m in Sources */,
+				09B0241F1B243AF400F91A11 /* MyRegexResult.m in Sources */,
 				09A9900D1AC80924001DB137 /* NSObject+MJKeyValue.m in Sources */,
 				09A990241AC80951001DB137 /* MBProgressHUD+MJ.m in Sources */,
 				09A7345F1B0B2CEB0072E652 /* MJPhotoLoadingView.m in Sources */,
@@ -1265,6 +1276,7 @@
 				097DF64F1AE35B780086190F /* MyStatusTool.m in Sources */,
 				09A98FFF1AC80924001DB137 /* AFHTTPRequestOperationManager.m in Sources */,
 				09A990091AC80924001DB137 /* MJIvar.m in Sources */,
+				09B0241C1B242C6100F91A11 /* MyEmotionAttachment.m in Sources */,
 				09A9901D1AC80924001DB137 /* UIView+WebCacheOperation.m in Sources */,
 				09A9900E1AC80924001DB137 /* MKAnnotationView+WebCache.m in Sources */,
 				09A990021AC80924001DB137 /* AFSecurityPolicy.m in Sources */,
