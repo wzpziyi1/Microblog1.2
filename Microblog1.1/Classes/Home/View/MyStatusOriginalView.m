@@ -15,12 +15,13 @@
 #import "UIImage+Extension.h"
 
 #import "MyStatusPhotosView.h"
+#import "MyStatusLabel.h"
 
 @interface MyStatusOriginalView()
 /** 昵称 */
 @property (nonatomic, weak) UILabel *nameLabel;
 /** 正文 */
-@property (nonatomic, weak) UILabel *textLabel;
+@property (nonatomic, weak) MyStatusLabel *textLabel;
 /** 来源 */
 @property (nonatomic, weak) UILabel *sourceLabel;
 /** 时间 */
@@ -48,9 +49,7 @@
         self.nameLabel = nameLabel;
         
         // 正文（内容）
-        UILabel *textLabel = [[UILabel alloc] init];
-        textLabel.font = MyStatusOrginalTextFont;
-        textLabel.numberOfLines = 0;
+        MyStatusLabel *textLabel = [[MyStatusLabel alloc] init];
         [self addSubview:textLabel];
         self.textLabel = textLabel;
         
@@ -113,7 +112,7 @@
     
     // 正文（内容）
 //    self.textLabel.text = status.text;
-    self.textLabel.attributedText = status.attribute;
+    self.textLabel.attribute = status.attribute;
     self.textLabel.frame = originalFrame.textFrame;
     
 #warning 需要时刻根据现在的时间字符串来计算时间label的frame

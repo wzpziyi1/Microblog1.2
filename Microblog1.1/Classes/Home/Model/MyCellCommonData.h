@@ -32,3 +32,13 @@
 
 // 富文本字体
 #define MyStatusRichTextFont [UIFont systemFontOfSize:13]
+
+#define MyColor(a,b,c) [UIColor colorWithRed:a/255.0 green:b/255.0 blue:c/255.0 alpha:1]
+// 转发微博正文字体
+#define MyStatusHighTextColor MyColor(88, 161, 253)
+
+// 超链接文本
+#define MyLinkText @"MyLinkText"
+
+//链接被选的通知
+#define MyLinkDidSelectedNotification @"MyLinkDidSelectedNotification"

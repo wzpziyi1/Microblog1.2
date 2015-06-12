@@ -32,17 +32,16 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) { // 初始化子控件
-        // 1.添加微博具体内容
+        // 添加微博具体内容
         MyStatusDetailView *detailView = [[MyStatusDetailView alloc] init];
         [self.contentView addSubview:detailView];
         self.detailView = detailView;
         
-        // 2.添加工具条
+        //添加工具条
         MyStatusToolbar *toolbar = [[MyStatusToolbar alloc] init];
         [self.contentView addSubview:toolbar];
         self.toolbar = toolbar;
         
-        // 3.cell的设置
         self.backgroundColor = [UIColor clearColor];
         
 //        self.userInteractionEnabled = NO;

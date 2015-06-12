@@ -12,12 +12,13 @@
 #import "MyUser.h"
 #import "UIImage+Extension.h"
 #import "MyCellCommonData.h"
+#import "MyStatusLabel.h"
 
 @interface MyStatusRetweetedView()
 /**  昵称 */
 @property (nonatomic, weak) UILabel *nameLabel;
 /** 正文 */
-@property (nonatomic, weak) UILabel *textLabel;
+@property (nonatomic, weak) MyStatusLabel *textLabel;
 @end
 
 @implementation MyStatusRetweetedView
@@ -28,7 +29,6 @@
     if (self) {
         self.image = [UIImage resizedImage:@"timeline_retweet_background"];
         
-        // 1.昵称
         UILabel *nameLabel = [[UILabel alloc] init];
         nameLabel.textColor = [UIColor colorWithRed:74 / 255.0 green:102 / 255.0 blue:105 / 255.0 alpha:1.0];
         
@@ -36,10 +36,7 @@
         [self addSubview:nameLabel];
         self.nameLabel = nameLabel;
         
-        // 2.正文（内容）
-        UILabel *textLabel = [[UILabel alloc] init];
-        textLabel.font = MyStatusRetweetedTextFont;
-        textLabel.numberOfLines = 0;
+        MyStatusLabel *textLabel = [[MyStatusLabel alloc] init];
         [self addSubview:textLabel];
         self.textLabel = textLabel;
         
@@ -59,12 +56,12 @@
     // 取出用户数据
     MyUser *user = retweetedStatus.user;
     
-    // 1.昵称
+    // 昵称
     self.nameLabel.text = [NSString stringWithFormat:@"@%@", user.name];
     self.nameLabel.frame = retweetedFrame.nameFrame;
     
-    // 2.正文（内容）
-    self.textLabel.attributedText = retweetedStatus.attribute;
+    // 正文
+    self.textLabel.attribute = retweetedStatus.attribute;
     self.textLabel.frame = retweetedFrame.textFrame;
 }
 

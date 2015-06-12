@@ -32,10 +32,10 @@
 {
     [super setTitle:title forState:state];
     
-    // 1.计算文字的尺寸
+    // 计算文字的尺寸
     CGSize titleSize = [title sizeWithFont:self.titleLabel.font];
     
-    // 2.计算按钮的宽度
+    // 计算按钮的宽度
     CGRect frame = self.frame;
     frame.size.width =titleSize.width + self.frame.size.height + 10;
     self.frame = frame;

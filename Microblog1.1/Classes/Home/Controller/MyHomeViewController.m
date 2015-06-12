@@ -34,6 +34,7 @@
 
 #import "MyStatusCell.h"
 #import "MyStatusFrame.h"
+#import "MyCellCommonData.h"
 @interface MyHomeViewController ()<MyPopMenuDelegate, UIScrollViewDelegate>
 
 
@@ -101,7 +102,26 @@
     self.tableView.tableFooterView = footView;
     self.footView = footView;
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(linkDidClick:) name:MyLinkDidSelectedNotification object:nil];
 }
+
+- (void)linkDidClick:(NSNotification *)note
+{
+    NSLog(@"111111");
+    NSString *str = note.userInfo[MyLinkText];
+    
+    if ([str hasPrefix:@"http"] || [str hasPrefix:@"HTTP"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    }
+    
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 /**
  *  监听scrollView的滚动，当footView滚动到一定位置时，开始上拉刷新
  *

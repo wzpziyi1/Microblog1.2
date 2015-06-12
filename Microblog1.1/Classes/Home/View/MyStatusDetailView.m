@@ -25,12 +25,12 @@
     if (self) { // 初始化子控件
         self.image = [UIImage resizedImage:@"timeline_card_top_background"];
         
-        // 1.添加原创微博
+        // 添加原创微博
         MyStatusOriginalView *originalView = [[MyStatusOriginalView alloc] init];
         [self addSubview:originalView];
         self.originalView = originalView;
         
-        // 2.添加转发微博
+        // 添加转发微博
         MyStatusRetweetedView *retweetedView = [[MyStatusRetweetedView alloc] init];
         [self addSubview:retweetedView];
         self.retweetedView = retweetedView;
@@ -46,10 +46,8 @@
     
     self.frame = detailFrame.frame;
     
-    // 1.原创微博的frame数据
     self.originalView.originalFrame = detailFrame.originalFrame;
     
-    // 2.原创转发的frame数据
     self.retweetedView.retweetedFrame = detailFrame.retweetedFrame;
 }
 

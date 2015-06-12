@@ -124,6 +124,8 @@
 		09CF22D71ABED911009DDBFA /* MyPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 09CF22D61ABED911009DDBFA /* MyPopMenu.m */; };
 		09DCA4F21ABD5D620075C5A5 /* UINavigationItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 09DCA4F11ABD5D620075C5A5 /* UINavigationItem+Extension.m */; };
 		09E6B7F31AD408A3001DEF56 /* MyComposeToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E6B7F21AD408A3001DEF56 /* MyComposeToolBar.m */; };
+		09F95C7A1B2AA73400E9F88B /* MyStatusLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F95C791B2AA73400E9F88B /* MyStatusLabel.m */; };
+		09F95C7D1B2AA84700E9F88B /* MyLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F95C7C1B2AA84700E9F88B /* MyLink.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,6 +372,10 @@
 		09DCA4F11ABD5D620075C5A5 /* UINavigationItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+Extension.m"; sourceTree = "<group>"; };
 		09E6B7F11AD408A3001DEF56 /* MyComposeToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyComposeToolBar.h; sourceTree = "<group>"; };
 		09E6B7F21AD408A3001DEF56 /* MyComposeToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyComposeToolBar.m; sourceTree = "<group>"; };
+		09F95C781B2AA73400E9F88B /* MyStatusLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatusLabel.h; sourceTree = "<group>"; };
+		09F95C791B2AA73400E9F88B /* MyStatusLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatusLabel.m; sourceTree = "<group>"; };
+		09F95C7B1B2AA84700E9F88B /* MyLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLink.h; sourceTree = "<group>"; };
+		09F95C7C1B2AA84700E9F88B /* MyLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLink.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,7 +400,6 @@
 		096696C11AEE7CE900E53631 /* Frame */ = {
 			isa = PBXGroup;
 			children = (
-				096696D01AEE82F700E53631 /* MyCellCommonData.h */,
 				096696CA1AEE7FE700E53631 /* MyStatusFrame.h */,
 				096696CB1AEE7FE700E53631 /* MyStatusFrame.m */,
 				096696CD1AEE81E700E53631 /* MyStatusOriginalFrame.h */,
@@ -424,6 +429,8 @@
 				09A734651B0B2E9E0072E652 /* MyStatusPhotosView.m */,
 				09A734671B0B2EC40072E652 /* MyStatusPhotoView.h */,
 				09A734681B0B2EC40072E652 /* MyStatusPhotoView.m */,
+				09F95C781B2AA73400E9F88B /* MyStatusLabel.h */,
+				09F95C791B2AA73400E9F88B /* MyStatusLabel.m */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -622,6 +629,7 @@
 		09A1FEAC1ABC426D00556B64 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				096696D01AEE82F700E53631 /* MyCellCommonData.h */,
 				096696C11AEE7CE900E53631 /* Frame */,
 				09A990331AC83271001DB137 /* MyUser.h */,
 				09A990341AC83271001DB137 /* MyUser.m */,
@@ -629,6 +637,8 @@
 				09A990371AC832A8001DB137 /* MyStatus.m */,
 				09A990391AC834EA001DB137 /* MyPhoto.h */,
 				09A9903A1AC834EA001DB137 /* MyPhoto.m */,
+				09F95C7B1B2AA84700E9F88B /* MyLink.h */,
+				09F95C7C1B2AA84700E9F88B /* MyLink.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1206,6 +1216,7 @@
 				09B751801AC2BB5A00F03084 /* MyNewfeatureViewController.m in Sources */,
 				09A9901A1AC80924001DB137 /* UIImage+WebP.m in Sources */,
 				09CB938B1AD19AA900D449F2 /* MyFootView.m in Sources */,
+				09F95C7A1B2AA73400E9F88B /* MyStatusLabel.m in Sources */,
 				09A990001AC80924001DB137 /* AFHTTPSessionManager.m in Sources */,
 				096E513F1AE40284002F5A66 /* MyUnreadCountParam.m in Sources */,
 				09DCA4F21ABD5D620075C5A5 /* UINavigationItem+Extension.m in Sources */,
@@ -1270,6 +1281,7 @@
 				09A990321AC82CBC001DB137 /* MyAccountTool.m in Sources */,
 				09A990171AC80924001DB137 /* UIButton+WebCache.m in Sources */,
 				09A734691B0B2EC40072E652 /* MyStatusPhotoView.m in Sources */,
+				09F95C7D1B2AA84700E9F88B /* MyLink.m in Sources */,
 				09A734731B0B923F0072E652 /* MyEmotionToolbar.m in Sources */,
 				09A1FECA1ABC448E00556B64 /* MyMessageViewController.m in Sources */,
 				097DF6401AE355780086190F /* MyUserInfoParam.m in Sources */,

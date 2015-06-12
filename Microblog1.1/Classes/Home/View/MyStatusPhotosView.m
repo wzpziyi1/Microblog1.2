@@ -29,7 +29,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // 预先创建9个图片控件
         for (int i = 0; i<MyStatusPhotosMaxCount; i++) {
             MyStatusPhotoView *photoView = [[MyStatusPhotoView alloc] init];
             photoView.userInteractionEnabled = YES;
@@ -71,10 +70,10 @@
     }
     browser.photos = photos;
     
-    // 3.设置默认显示的图片索引
+    // 设置默认显示的图片索引
     browser.currentPhotoIndex = recognizer.view.tag;
     
-    // 3.显示浏览器
+    // 显示浏览器
     [browser show];
 }
 

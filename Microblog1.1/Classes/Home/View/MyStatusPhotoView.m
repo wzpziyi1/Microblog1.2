@@ -28,6 +28,7 @@
         
         // 添加一个gif图标
         UIImage *image = [UIImage imageWithName:@"timeline_image_gif"];
+        
         // 这种情况下创建的UIImageView的尺寸跟图片尺寸一样
         UIImageView *gifView = [[UIImageView alloc] initWithImage:image];
         [self addSubview:gifView];
@@ -40,10 +41,10 @@
 {
     _photo = photo;
     
-    // 1.下载图片
+    //下载图片
     [self setImageWithURL:[NSURL URLWithString:photo.thumbnail_pic] placeholderImage:[UIImage imageWithName:@"timeline_image_placeholder"]];
     
-    // 2.控制gif图标的显示
+    //控制gif图标的显示
     NSString *extension = photo.thumbnail_pic.pathExtension.lowercaseString;
     self.gifView.hidden = ![extension isEqualToString:@"gif"];
 }
