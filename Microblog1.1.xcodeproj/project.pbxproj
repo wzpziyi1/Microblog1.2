@@ -10,6 +10,7 @@
 		09467E931B0CDA7400815AC1 /* EmotionIcons in Resources */ = {isa = PBXBuildFile; fileRef = 09467E921B0CDA7400815AC1 /* EmotionIcons */; };
 		09467E961B0CDF2A00815AC1 /* MyEmotionGirdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09467E951B0CDF2A00815AC1 /* MyEmotionGirdView.m */; };
 		09467E991B0CDF5A00815AC1 /* MyEmotionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09467E981B0CDF5A00815AC1 /* MyEmotionView.m */; };
+		09507B441B2C820000058AC7 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 096A03381B2C7CD900E7DCF4 /* libsqlite3.dylib */; };
 		09622CFF1B1C4558006F4B40 /* MyEmotionPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09622CFE1B1C4558006F4B40 /* MyEmotionPopView.m */; };
 		09622D011B1C457A006F4B40 /* MyEmotionPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09622D001B1C457A006F4B40 /* MyEmotionPopView.xib */; };
 		096696CC1AEE7FE700E53631 /* MyStatusFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 096696CB1AEE7FE700E53631 /* MyStatusFrame.m */; };
@@ -166,6 +167,7 @@
 		096696E11AEE888A00E53631 /* MyStatusOriginalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatusOriginalView.m; sourceTree = "<group>"; };
 		096696E31AEE89AC00E53631 /* MyStatusRetweetedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatusRetweetedView.h; sourceTree = "<group>"; };
 		096696E41AEE89AC00E53631 /* MyStatusRetweetedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatusRetweetedView.m; sourceTree = "<group>"; };
+		096A03381B2C7CD900E7DCF4 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		096E513A1AE401B2002F5A66 /* MyBaseParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBaseParam.h; sourceTree = "<group>"; };
 		096E513B1AE401B2002F5A66 /* MyBaseParam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBaseParam.m; sourceTree = "<group>"; };
 		096E513D1AE40284002F5A66 /* MyUnreadCountParam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyUnreadCountParam.h; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09507B441B2C820000058AC7 /* libsqlite3.dylib in Frameworks */,
 				09AB97B51B228FD20058A023 /* libicucore.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,6 +505,7 @@
 		09A1FE701ABC413500556B64 = {
 			isa = PBXGroup;
 			children = (
+				096A03381B2C7CD900E7DCF4 /* libsqlite3.dylib */,
 				09AB97B41B228FD20058A023 /* libicucore.dylib */,
 				09A1FE7B1ABC413500556B64 /* Microblog1.1 */,
 				09A1FE981ABC413500556B64 /* Microblog1.1Tests */,
