@@ -39,37 +39,16 @@
     [self   setNaviagtionTheme];
 }
 
-+ (void)setNaviagtionTheme   //设置导航栏主题，在ios6中，导航栏显示很不好看，需要调整
++ (void)setNaviagtionTheme   //设置导航栏主题
 {
-//    UINavigationBar *appearance = [UINavigationBar appearance];
-//    
-//    if ([[UIDevice currentDevice].systemVersion floatValue] < 7.0) {   //设置导航栏样式  ，ios7中不需要
-//        [appearance setBackgroundImage:[UIImage imageWithName:@"navigationbar_background"]
-//                         forBarMetrics:UIBarMetricsDefault];
-//    }
-//    // 设置文字属性
-//    NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-//    textAttrs[NSForegroundColorAttributeName] = [UIColor blackColor];
-//    // UITextAttributeFont  --> NSFontAttributeName(iOS7)
 
-//    textAttrs[NSFontAttributeName] = [UIFont boldSystemFontOfSize:28];
-//    
-//    // UIOffsetZero是结构体, 只要包装成NSValue对象, 才能放进字典\数组中,这样可以取消重叠的阴影
-//    textAttrs[NSShadowAttributeName] = [NSValue valueWithUIOffset:UIOffsetZero];
-//    
-//    [appearance setTitleTextAttributes:textAttrs];
     
     UINavigationBar *appearance = [UINavigationBar appearance];
-    
-    // 设置导航栏背景，ios7中不需要
-    if ([[UIDevice currentDevice].systemVersion floatValue] < 7.0) {
-        [appearance setBackgroundImage:[UIImage imageWithName:@"navigationbar_background"] forBarMetrics:UIBarMetricsDefault];
-    }
     
     // 设置文字属性
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
     textAttrs[UITextAttributeTextColor] = [UIColor blackColor];
-    // UITextAttributeFont  --> NSFontAttributeName(iOS7)
+ 
 
     textAttrs[UITextAttributeFont] = [UIFont boldSystemFontOfSize:20];//粗体，
     // UIOffsetZero是结构体, 只要包装成NSValue对象, 才能放进字典\数组中
@@ -105,7 +84,7 @@
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-#warning 注意导航控制器这里的情况
+
     if (self.childViewControllers.count > 0) {   //这里应该是self，而不是viewController，因为当前的控制器就是viewController所在的导航控制器
         
         viewController.hidesBottomBarWhenPushed = YES;

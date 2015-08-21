@@ -68,8 +68,6 @@
         container.userInteractionEnabled = YES; //该属性值为布尔类型，如属性本身的名称所释，该属性决定UIView是否接受并响应用户的交互。当值设置为NO后，UIView会忽略那些原本应该发生在其自身的诸如touch和keyboard等用户事件，并将这些事件从消息队列中移除出去。当值设置为YES后，这些用户事件会正常的派发至UIView本身(前提事件确实发生在该view上)，UIView会按照之前注册的事件处理方法来响应这些事件。
         [self addSubview:container];
         self.container = container;
-        //self.blackBackground = YES;
-        //self.arrowPosition = MyPopMenuArrowPositionRight;
         
     }
     return self;
@@ -113,7 +111,7 @@
 
 - (void)showInRect:(CGRect)rect
 {
-    //把菜单整体添加到主窗口上，这个UIView是透明的，只是其内部空间不透明
+    
     UIWindow *window= [UIApplication sharedApplication].keyWindow;
     self.frame = window.bounds;
     [window addSubview:self];

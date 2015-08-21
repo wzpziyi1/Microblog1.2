@@ -12,7 +12,7 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {                                 //一些控件属性，是一样的，所以最好在初始化设置一次就好，若需要特殊要求，那么覆盖掉已经设置好的属性即可
+    if (self) {
         
         self.imageView.contentMode = UIViewContentModeCenter;  //图片按照原样居中显示
         self.titleLabel.textAlignment = NSTextAlignmentRight;

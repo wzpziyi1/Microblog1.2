@@ -76,6 +76,7 @@
 
 - (void)setTabBarButtonFrame
 {
+    
     int index = 0;  //这边tabbar里面有四个tabbarItem，需要索引区别
 //    NSLog(@"----------");
     for (UIView *tabBarButton in self.subviews) {  //虽然UITabBarButton在tabbar里面是私有的，但是可以通过查看tabbar的子控件的方式，使得有强指针指向这个控件，从而达到修改其属性的目的

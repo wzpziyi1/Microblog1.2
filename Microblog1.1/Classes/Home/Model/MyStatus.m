@@ -85,7 +85,9 @@
     
     // 匹配表情
     NSString *emotionRegex = @"\\[[a-zA-Z0-9\\u4e00-\\u9fa5]+\\]";
-    
+//    [text enumerateStringsMatchedByRegex:<#(NSString *)#> usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+//        <#code#>
+//    }]
     [text enumerateStringsMatchedByRegex:emotionRegex usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
         MyRegexResult *result = [[MyRegexResult alloc] init];
         result.string = *capturedStrings;

@@ -313,7 +313,6 @@
     [UIView animateWithDuration:0.75 animations:^{
         showStatus.transform = CGAffineTransformMakeTranslation(0, 35);
     } completion:^(BOOL finished) {
-//        [NSThread sleepForTimeInterval:1];  //阻塞主线程1s，再执行下面操作
         
         
         /**
